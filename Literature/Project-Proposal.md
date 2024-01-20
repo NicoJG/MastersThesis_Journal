@@ -1,0 +1,6 @@
+- cloud drifts to low-side, because of charge separation ($\nabla \times B$) which leads to a vertical $E$ field, which lead to an $E \times B$-drift
+- In which direction is the $E \times B$-drift? Doesn't it also separate the charges? no $v_E = \frac{E \times B}{B^2}$, so charge independent
+- asymmetry in low-field to high-field side -> non-uniform heating
+- high-field side less effective shielding (what shielding?) -> enhanced ablation -> "rocket" towards low-field side
+- What is the symmetric part (neutral gas shielding)?
+- What is the main heat source into the ablation cloud/pellet?
