@@ -24,7 +24,7 @@
 # Chapter 2
 
 - ablation cloud characteristics first measured 1980s
-- pellet ablates very quickly and after $5-\qty{10}{\ms}$ the temperature in the neutral cloud (cigar shaped) is $20-\qty{25}{\eV}$ with density around $\qty{1e23}{\m^{-3}}$
+- pellet ablates very quickly and after 5-10 ms the temperature in the neutral cloud (cigar shaped) is 20-25 eV with density around $10^{23}$ $m^{-3}$
 - ablation rate not measured -> hard to construct machine independent models
 - IPADBASE (International Pellet Ablation Data Base) includes measurements on the pellet penetration/ablation in several tokamaks, with wide range of parameters
 - ablation seems to be the same in stellerators, but enhanced in Reversed Field Pinches (RFP)
@@ -44,7 +44,7 @@
     - magnetic shielding <-> partial expulsion of magnetic field, reduced incident flux, potentially important in future reactors due to higher diamagnetism
     - electrostatic shielding <-> ionized part of ablation cloud is slightly negatively charged, repels electrons
     - neutral gas shielding/plasma shielding <-> collisions of incident particles with cloud, ionizing and heating the ablatant (cloud)
-        \4 low-sublimation energy (\qty{1e-2}{\eV\per\mol}) of hydrogen leads to almost 100\% neutral gas/plasma shielding (impurity pellets have high sublimation energy $~\qty{7.5}{\eV\per\text{atom}}$, lower shielding) ?
+        - low-sublimation energy ($10^{-2}$ eV/mol) of hydrogen leads to almost 100% neutral gas/plasma shielding (impurity pellets have high sublimation energy ~7.5 eV/atom, lower shielding) ?
         \4 the ablation cloud is larger for low-sublimation energy because material is more easily ejected
 - Neutral Gas Shielding (NGS) model by Parks 1978
     - spherically symmetric ablation cloud expansion
@@ -92,8 +92,8 @@
 # Chapter 3
 
 - several different dynamics contribute to the pellet material being spread over the whole plasma inside the tokamak (or stellerator)
-- initially parallel expansion along field lines with measured velocity of $\qty{1e5}{\m\per\s}$ then slows down, sometimes longer than one turn around the tokoamak
-- whole homogenization process lasts less than $\qty{1}{\ms}$
+- initially parallel expansion along field lines with measured velocity of $10^5$ m/s then slows down, sometimes longer than one turn around the tokoamak
+- whole homogenization process lasts less than 1 ms
 - in stellerator LHD, homogenization found to be globally adiabatic
 - The pellet injection modifies the electric potential in the plasma
     - edge was observed to become more negative
@@ -104,16 +104,16 @@
     - experimentally observed by difference in calculated and measured post-injection density profile, which is shifted more outwards than expected
     - also through comparing low- and high-field-side injection, where in HFS injection the matter is deposited more outwards than the maximum pellet penetration depth
     - how can we measure pellet penetration depth independent of density profile? (optical fibers?)
-    - drift velocity $~\qty{1e4}{\m\per\s}$
+    - drift velocity $~10^4$ m/s
     - measured magnitude of outward displacement compared to ablation profile is low, however better penetration from HFS observed (contradictory?)
 - "Another consequence of the presence of such a drift is the acceleration of the pellet in the direction of the plasma major radius..." briefly talks about rocket effect
-    - outward acceleration $~\qty{5e5}{\m\per\s\squared}$
+    - outward acceleration $~5\cdot 10^5$ m/$s^2$
     - attributed to either rocket effect or "drag force between the drifting material and the pellet surrounded by its neutral cloud" ?
 - in stellerators the same outward drift exists but is harder to interpret and measure because magnetic field changes over smaller scales and is more complicated
 - in W7-AS a low-velocity inward drift was observed, potentially drag of inward flowing plasma
 - models:
 - 3 models for parallel expansion
-    - Parks 1D model is a "Lagrangian model"? -> pressure equilibration $~\qty{100}{\mu\s}$ much faster than temperature equilibration
+    - Parks 1D model is a "Lagrangian model"? -> pressure equilibration ~100$\mu s$ much faster than temperature equilibration
     - Rozhansky 1D model -> supersonic expansion forms shock front, in reactor grade conditions cloud cold for longer
     - Pegourie 0D model -> includes plasma viscosity -> first supersonic then subsonic
 - the potential perturbation might be due to faster temperature equilibration than density equilibration -> electrons leave cloud faster -> cloud slightly positive and plasma slightly negative
