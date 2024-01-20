@@ -1,3 +1,4 @@
+Pégourié, B. “Review: Pellet Injection Experiments and Modelling.” _Plasma Physics and Controlled Fusion_ 49, no. 8 (July 2, 2007): R87. [https://doi.org/10.1088/0741-3335/49/8/R01](https://doi.org/10.1088/0741-3335/49/8/R01).
 # Introduction
 
 - pellet injection is used both for fuelling and controlling

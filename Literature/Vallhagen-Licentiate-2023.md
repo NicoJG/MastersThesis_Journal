@@ -1,3 +1,4 @@
+Vallhagen, Oskar. “Disruption Mitigation in Tokamaks with Massive Material Injection.” Chalmers University of Technology, 2023. [https://research.chalmers.se/en/publication/535522](https://research.chalmers.se/en/publication/535522).
 # Chapter 3
 
 - ablated and ionized material starts to homogenize + pressure and temperature equilibrate
