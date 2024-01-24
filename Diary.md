@@ -40,3 +40,15 @@
 	- tried a cosine- and sine-Fourier series, but same problem
 	- I don't understand the reason why Per's choices should work out
 	- after Oskar helped me a bit I succeeded with the Legendre polynomials, but there are some inconsistencies with Per's notes. Per's equations B and C are probably wrong. And I probably have a sign error somewhere, because both $\alpha_l = \pm 2$ don't fit Per's version.
+
+## 2024-01-24
+
+- there is no sign mistake. (I didn't take into account that d/dx(cosx)=-sinx)
+- had a meeting with Per, Tünde, Istvan, Oskar
+	- showed them my derived equations
+	- Oskar explained that there needs to be 2 extra equations to calculate the heat flux
+	- talked about how Parks approached the topic
+	- they tried to make a very rough estimate on the order of magnitude of the rocket acceleration, the result was that the stopping length is on the order of 1m times degree of asymmetry, but it was very unclear if the estimate was good, they used as heat flux into the neutral cloud the energy flux of thermal electrons in a typical tokamak plasma and it might be much lower
+- derived the rocket force like Per did but with the Legendre polynomial expansion [[derivation_force_from_perturbation.pdf]]
+	- apparently the rocket force only depends on the l=1 mode, i.e. Per's derivation was already sufficient
+	- my note-taking program Onenote decided to delete all my notes so I had to do most of it twice...
