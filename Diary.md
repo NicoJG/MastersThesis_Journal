@@ -52,3 +52,12 @@
 - derived the rocket force like Per did but with the Legendre polynomial expansion [[derivation_force_from_perturbation.pdf]]
 	- apparently the rocket force only depends on the l=1 mode, i.e. Per's derivation was already sufficient
 	- my note-taking program Onenote decided to delete all my notes so I had to do most of it twice...
+
+## 2024-01-25
+
+- started to write my [[Planning Report]]
+- discussed the theta dependence with Oskar and showed him my derivation
+- meeting with Per, Tünde, Oskar to continue yesterdays discussion
+	- the rough estimate was good enough and even though the order of magnitude can vary quite a bit, there are probably some cases where the effect is very important
+	- the boundary conditions on the surface of the neutral cloud will be treated as far away (->$\infty$)
+	- the problem is very much related to the solar wind problem (with constant temperature in atmosphere)
