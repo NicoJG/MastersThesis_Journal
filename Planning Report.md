@@ -19,7 +19,6 @@ The full dynamics cannot be taken into account. Especially for the ionized cloud
 
 ## Specific questions to be answered
 
-- Does a self-consistent model exist that can capture all relevant dynamics?
 - How large is the rocket acceleration in a typical pellet injection scenario, and how much does it affect the penetration depth of the pellet?
 - How does the effect depend on the pellet size, composition and background plasma parameters?
 - Is this effect relevant in reactor-grade conditions?
@@ -31,7 +30,7 @@ Roughly separate but overlapping are the following steps of this project
 ## Phase 1: Literature review
 
 - Read relevant sections in the review paper on pellet injection \[Pégourié 2007\]
-- Read previous studies on the rocket effect (\[Senichenkov 2007] and \[Szepesi 2009\])
+- Read previous studies on the rocket effect (\[Senichenkov 2007\] and \[Szepesi 2009\])
 - Read about the Neutral Gas Shielding model \[Parks 2009\]
 - Read relevant other literature that helps further understanding of the topic
 
