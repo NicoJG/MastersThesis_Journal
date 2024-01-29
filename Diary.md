@@ -61,3 +61,10 @@
 	- the rough estimate was good enough and even though the order of magnitude can vary quite a bit, there are probably some cases where the effect is very important
 	- the boundary conditions on the surface of the neutral cloud will be treated as far away (->$\infty$)
 	- the problem is very much related to the solar wind problem (with constant temperature in atmosphere)
+
+## 2024-01-26
+
+- talked with Per about the possibility to go to Greifswald for my PhD
+- finished a first draft of the [[Planning Report]]
+- short meeting with Per, Tünde, Oskar to discuss how we can estimate the external heat flux
+- read first part of [[Parks-1978]] paper
