@@ -68,3 +68,19 @@
 - finished a first draft of the [[Planning Report]]
 - short meeting with Per, Tünde, Oskar to discuss how we can estimate the external heat flux
 - read first part of [[Parks-1978]] paper
+
+## 2024-01-29
+
+- Group meeting
+- Supervision meeting
+	- gone through planning report
+	- gone through Oskars summary
+	- next step is getting all equations correct, the way Oskar has them
+	- then normalize the equations
+- started to go through the derivation again
+
+## 2024-01-30
+
+- derived the set of equations again a bit more clean [[full_derivation_more_clean.pdf]]
+- compared with Oskars notes [[Summary_by_Oskar_2024-01-29.pdf]] and added a few comments where factors of $m$ are missing and one sign was wrong, but generally we got the same system of equations
+- I learned a lot about multivariable calculus, directional derivatives and the Jacobian today, also how to properly linearize equations (with Taylor expansion or the usual way)
