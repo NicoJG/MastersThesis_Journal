@@ -84,3 +84,8 @@
 - derived the set of equations again a bit more clean [[full_derivation_more_clean.pdf]]
 - compared with Oskars notes [[Summary_by_Oskar_2024-01-29.pdf]] and added a few comments where factors of $m$ are missing and one sign was wrong, but generally we got the same system of equations
 - I learned a lot about multivariable calculus, directional derivatives and the Jacobian today, also how to properly linearize equations (with Taylor expansion or the usual way)
+
+## 2024-01-31
+
+- rederived the normalized equations for the spherical part that can be solved numerically, which are in Parks paper [[normalized_zeroth_order_eqs.pdf]]
+	- found a mistake we made when copying the dE/dr equation. He divides by $\langle \cos \theta \rangle = 1/2$ which means we should multiply by 2
