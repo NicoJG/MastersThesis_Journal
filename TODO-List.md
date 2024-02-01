@@ -1,6 +1,11 @@
 
 - write planning report ✅
 - go through Parks paper
+- solve spherical part numerically
+	- implement solver to get $\eta_*$ and $\lambda_*$ for one specific $E_*$ 
+	- implement integration to infinity to get $E_{bg}$ , $q_{bg}$ , $q_*$ 
+	- solve system of equations to find $v_*$ , $T_*$ , $p_*$ , G
+	- compare to Parks results
 - skim through Szepesi paper
 - go through first part of Oskars thesis
 - derive equations for incoming heat (-transport/-absorption) ✅

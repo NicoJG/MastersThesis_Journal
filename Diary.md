@@ -89,3 +89,10 @@
 
 - rederived the normalized equations for the spherical part that can be solved numerically, which are in Parks paper [[normalized_zeroth_order_eqs.pdf]]
 	- found a mistake we made when copying the dE/dr equation. He divides by $\langle \cos \theta \rangle = 1/2$ which means we should multiply by 2
+
+## 2024-02-01
+
+- I made myself clear what has to be done in order to solve the set of differential equations numerically
+- understand Parks method
+- transformed the equations to form a boundary value problem from 0 (pellet radius) to 1 (sonic radius)
+- outlined all equations I will need in [[numerics_outline_spherical_part.pdf]]
