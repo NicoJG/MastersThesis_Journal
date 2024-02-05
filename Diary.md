@@ -96,3 +96,26 @@
 - understand Parks method
 - transformed the equations to form a boundary value problem from 0 (pellet radius) to 1 (sonic radius)
 - outlined all equations I will need in [[numerics_outline_spherical_part.pdf]]
+
+## 2024-02-02 and 2024-02-03
+
+- created a GitHub repository for the code of this project and set up the Python environment https://github.com/NicoJG/MastersThesis_Code
+- created functions that represent all the equations of the NGS model necessary to solve the ode system numerically
+- tried to solve the boundary value problem $r \in [0,1]$ for the unknown parameters $\lambda_*$ and $\eta_*=r_p/r_*$
+	- I had a lot of bugs that I tried to solve, for example "divide by zero" or "invalid value encountered" errors
+	- once I got rid of the error messages, the solve_bvp function of SciPy just got stuck
+	- It seems like the "shooting method" that Parks used is better than the boundary value problem
+- switched the code to solve_ivp (initial value problem)
+	- It is unclear how to choose and vary $\lambda_*$ exactly
+	- I only got unreasonable results so far, where for example the velocity decreases with radius
+	- while trying to figure out what is wrong I found some sign errors and small copying mistakes, but they did not change the numerical solution at all
+- I have found out that with the events in the solve_ivp function I can stop the integration once the boundary conditions are met
+- while thinking about how to vary $\lambda_*$ and later the parameters in the asymmetric part I noticed that both tensorflow and PyTorch have ode solvers and PyTorch even has the events for stopping as well. This might be useful since there it is very easy to calculate derivatives of the parameters with respect to the ode solution
+
+## 2024-02-05
+
+- I changed the method in [solve_ivp](https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_ivp.html) from RK45 to Radau and now it solves it much faster and does not get stuck for some values of $\lambda_*$ anymore
+- the solutions still vary sometimes strongly depending on which $\lambda_*$ I choose and there is a whole range of $\lambda_*$ where the boundary conditions at $r=r_p$ are met
+- Group meeting
+- Supervision meeting:
+	- 
