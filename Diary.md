@@ -118,4 +118,10 @@
 - the solutions still vary sometimes strongly depending on which $\lambda_*$ I choose and there is a whole range of $\lambda_*$ where the boundary conditions at $r=r_p$ are met
 - Group meeting
 - Supervision meeting:
-	- 
+	- I was asked to put the papers on GitHub for convenience. Now they are in the Literature folder
+	- The $\lambda_*$ formulas given in the end of Parks Page 1738 are for $\gamma=5/3$ , keep that in mind when comparing
+	- it probably works for such a large range of $\lambda_*$ values because the tolerance for the boundary condition is to large -> lower it
+	- look into the step size, maybe it is too large at some places
+	- the precision we need is basically determined by which ratios in the first order differential equations are important, Oskar suggested $v^2/T$ to be important
+- turns out the $dv^2/dr$  singularities at $r=1$ and $r=r_p$ make the calculation very unstable
+	- I wanted to detect the singularities with seeing when the denominator becomes very small, but the result I get depends on how small I let it be
