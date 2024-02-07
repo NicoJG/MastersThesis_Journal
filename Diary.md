@@ -125,3 +125,22 @@
 	- the precision we need is basically determined by which ratios in the first order differential equations are important, Oskar suggested $v^2/T$ to be important
 - turns out the $dv^2/dr$  singularities at $r=1$ and $r=r_p$ make the calculation very unstable
 	- I wanted to detect the singularities with seeing when the denominator becomes very small, but the result I get depends on how small I let it be
+
+## 2024-02-06 and 2024-02-07
+
+- still trying to make the $r=1$ downward calculation more stable
+- I have learned a lot from just playing around with parameters and methods:
+	- the singularity at $r=1$ does not matter too much as long as Dv^2 > DT the solution does not diverge
+	- if T and v^2 approach the same value at lower r, there is another singularity which makes solve_ivp stop with the message "Required step size is less than spacing between numbers.", but this is ok as this will only happen for wrong $\lambda_*$ values
+	- In general to achieve the highest possible precision, solve_ivp often "fails" with the mentioned message, but this is alright because it only happens while trying to find the exact boundary
+	- for correct $\lambda_*$ values, all $v^2, T, q, E$ are 0 at the pellet radius. I now doubt the stated 15% energy at the pellet surface as Parks stated it. This is only an artifact of numerics
+	- I made the algorithm fail less often by setting the absolute tolerance in solve_ivp quite high for E and very small for v2,T,q, because the slope of E diverges at $r_p$ and it goes vertically to 0
+- to find the correct $\lambda_*$, it seems to be best to use scipy.optimize.root together with $T(r_p) - q(r_p)$ 
+	- I first used scipy.optimize.minimize with $|T(r_p)|+|q(r_p)|$ but this is not smooth when $\lambda_*$ only changes very slightly and the algorithm gets stuck in one of those local minima that might not even be near 0
+	- $T(r_p) - q(r_p)$ starts negative for small $\lambda_*$ ($\approx 0.5$) and has a root where both are 0, then it is positive afterwards. It is however only increasing until around $\lambda_* \approx 1.5$, so the starting guess has to be quite low to find the correct root
+	- some $\lambda_*$ scans revealed that there are some spikes where $T(r_p) - q(r_p)$ suddenly jumps from positive to negative, this happens sometimes when the $T=v^2$ singularitiy happens before the boundary conditions are fulfilled. I don't think this will ever cause trouble with finding the root though because it only happens for large $\lambda_*$
+- since the triggering of the boundary condition often fails, I use the values of the solution where $|T(r_p)|+|q(r_p)|$ is the smallest as I hope this will be closest to the pellet radius the algorithm can overshoot sometimes a bit
+- a scan for $\gamma = 5/3$ is somehow quite unstable even around the important $\lambda_*$ values
+	- see the following images where $\lambda_*$ is quite close to each other but the shape of the solution is very different. We want something that looks like the left plot, but the right plot somehow also appears in between
+	![[ode0_lambda_scan_gamma_5_3_unstable.png]]
+	- also, for high $\lambda_*$ the $T=v^2$ singularities are very close to each other and this lets the algorithm fail with an error
