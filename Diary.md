@@ -144,3 +144,14 @@
 	- see the following images where $\lambda_*$ is quite close to each other but the shape of the solution is very different. We want something that looks like the left plot, but the right plot somehow also appears in between
 	![[ode0_lambda_scan_gamma_5_3_unstable.png]]
 	- also, for high $\lambda_*$ the $T=v^2$ singularities are very close to each other and this lets the algorithm fail with an error
+
+## 2024-02-08
+
+- I can't reproduce this unstable behavior from yesterday
+- Now it seems like the solutions slowly change with lambda (not rapidly like yesterday)
+- The root finding algorithm seems to work very well. I find $\lambda_*$ values where $|T(r_p)|+|q(r_p)| \approx 10^{-10}$ and it I have tested it for $E_* = 3*10^2$ to $3*10^7$ and for $\gamma = 7/5$ and $5/3$ and the solutions all look fine
+- I have implemented the integration from $r=1$ towards $r \rightarrow \infty$ 
+	- I trigger convergence where $(dq/dr + dE/dr - \epsilon) = 0$  , and currently I use $\epsilon = 10^{-20}$, but it even works with $\epsilon = 10^{-200}$ and finds convergence in less than a minute
+	- What this is supposed to give me is $q(r\rightarrow \infty)$ and $E(r \rightarrow \infty)$ because we need it for further calculations
+- it might be a bit too precise, in the sense that it takes quite long (~1 minute) to calculate $\lambda_* , r_p, E(\infty)$ for a given $E_*,\gamma$ 
+- started to derive the normalized set of equations for the first order
