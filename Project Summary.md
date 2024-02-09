@@ -1,8 +1,10 @@
 This document is supposed to give an overview of the project without going into all details.
 It should refer to other notes or documents that contain the necessary details. It should also state which parts of the project are done (provisionally) and potentially where I'm working on. As the steps of this project might change, this is an evolving document, unlike the planning report, which was how we envisioned the project at the start.
+Oskars summary is more detailed and includes all necessary details. (see [[Summary_by_Oskar_2024-02-09.pdf]])
 
 ✅ -> Done
-⏳ -> Currently working on
+🔥 -> Currently working on
+⏳ -> Partly done, but not working on currently
 ⛔ -> Not started yet
 
 
@@ -40,7 +42,7 @@ T(r_p)=0 \quad,\quad q(r_p)=0 \quad,\quad q(\infty)=q_{bg} \quad,\quad E(\infty)
 $$
 While the non-normalized pellet radius $\bar{r}_p$ is an input parameter, the normalized pellet radius $r_p$ is not known since $r_*$ is not known.
 
-## Solving the differential equations numerically ⏳
+## Solving the differential equations numerically 🔥
 
 The normalized set of equations has two unknown parameters ($E_*$ and $\lambda_*$). If those parameters are known, the equations can be integrated starting from $r=1$.
 So most of the work done in this part is to find values of $E_*$ and $\lambda_*$ for which all of the boundary conditions are fulfilled and by that also infer the unknown boundary $r_p$ .
@@ -51,13 +53,33 @@ Once $E_*, \lambda_*, r_p$ are determined, the ODE system can be integrated from
 
 With all relations outlined in [[numerics_outline_spherical_part.pdf]] (ignore the "make boundary value problem") one could now theoretically calculate all non-normalized values and the full zeroth order system is solved. ⛔ 
 
-Since this model needs $E_*$ as an input, but in reality $E_{bg}$ is an input parameter, it is important to find a formula to calculate $E_*(E_{bg})$. Additionally if one does not want to execute the whole algorithm, one would also need expressions for $\lambda_*$, $r_p$ and $q_*(q_{bg})$. Those relations are given in eq. 22 - 26 in [[Parks-1978]] and won't be refitted here. However, to evaluate if my algorithm is correct, I want to recreate figures 1, 2 and 4 in [[Parks-1978]]. ⏳
+Since this model needs $E_*$ as an input, but in reality $E_{bg}$ is an input parameter, it is important to find a formula to calculate $E_*(E_{bg})$. Additionally if one does not want to execute the whole algorithm, one would also need expressions for $\lambda_*$, $r_p$ and $q_*(q_{bg})$. Those relations are given in eq. 22 - 26 in [[Parks-1978]] and won't be refitted here. However, to evaluate if my algorithm is correct, I want to recreate figures 1, 2 and 4 in [[Parks-1978]]. 🔥
 
 # Asymmetric perturbation to NGS (1st order)
 
+From here on we assume the solution to the zeroth order is known and we add a first order perturbation that depends not only on $r$ (like the NGS model) but also on $\theta$. The idea and first derivation was proposed by Per Helander and is in [[Initial_derivations_by_Per.pdf]].
+
+## Derivation of the set of equations ⏳
+
+The perturbation is taken to be of the form $p(\vec{r})=p_0(r)+p_1(r,\theta)$ and $\vec{v}(\vec{r})=v_0(r)\hat{r} + u_1(r,\theta)\hat{r}+ v_1(r,\theta)\hat{\theta}$ and the first order is assumed to be much smaller than the zeroth order, so that the system of equations can be linearized. Each first order quantity is then expanded in a general orthogonal basis $\{X_l(\theta)\}$ like $T_1(r,\theta) = \sum_l \tau_l(r) X_l(\theta)$. Except for $v_1$ which is expanded in a different general basis $\{Y_l( \theta )\}$, because that is needed to late be able to separate the $r$- and $\theta$-dependence.
+
+Inserting this expansion into the original set of fluid equations leads then to a set of equations for the radial part. When requiring that the $\theta$-dependence is separated in the equations from the $r$-dependence, this gives us equations for $X_l$ and $Y_l$. It turns out they have to be the [associated Legendre polynomials](https://en.wikipedia.org/wiki/Associated_Legendre_polynomials), which is convenient, because this way the solutions are already known and the theta dependence is set. All of this leads to a set of 6 equations for the radial part of the first order quantities. The full derivation can be seen in [[full_derivation_more_clean.pdf]]. ✅ 
+
+The boundary conditions are already set, but I have to make them more clear in my head. ⛔ 
+
+The first order quantities are normalized to the value at the sonic radius times $q_{rel}$, which is the relative contribution of the asymmetric background heatflux to the total background heatflux. This leads to a very similar set of 6 equations. Oskar has derived those, but I still have to derive them myself. ⛔ 
+
+## Solving the differential equations numerically
+
 (to be written)
 
-# Pellet rocket force
+# Pellet rocket force ⏳
+
+## Derivation of the force ✅ 
+
+(to be written)
+
+## Estimating the magnitude of the rocket acceleration ⛔ 
 
 (to be written)
 
