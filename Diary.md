@@ -160,3 +160,4 @@
 
 - Started to write a concise summary of the project in [[Project Summary]], where I keep track of what parts of the project are done and where I am working on.
 - Division seminar on "Water drop as an analogy for an atom"
+- Started to write code to sweep over multiple $E_\star$ and $\gamma$ values, but somehow the algorithm fails sometimes and I cant figure out why
