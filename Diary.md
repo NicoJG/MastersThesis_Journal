@@ -155,3 +155,8 @@
 	- What this is supposed to give me is $q(r\rightarrow \infty)$ and $E(r \rightarrow \infty)$ because we need it for further calculations
 - it might be a bit too precise, in the sense that it takes quite long (~1 minute) to calculate $\lambda_* , r_p, E(\infty)$ for a given $E_*,\gamma$ 
 - started to derive the normalized set of equations for the first order
+
+## 2024-02-09
+
+- Started to write a concise summary of the project in [[Project Summary]], where I keep track of what parts of the project are done and where I am working on.
+- Division seminar on "Water drop as an analogy for an atom"
