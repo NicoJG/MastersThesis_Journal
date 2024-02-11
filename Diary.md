@@ -161,3 +161,16 @@
 - Started to write a concise summary of the project in [[Project Summary]], where I keep track of what parts of the project are done and where I am working on.
 - Division seminar on "Water drop as an analogy for an atom"
 - Started to write code to sweep over multiple $E_\star$ and $\gamma$ values, but somehow the algorithm fails sometimes and I cant figure out why
+
+# 2024-02-10 and 2024-02-11
+
+- I finished recreating the figures in [[Parks-1978]].
+- I started to learn to use [seaborn](https://seaborn.pydata.org/) since this is probably a nicer plotting experience than just using matplotlib
+- Found some bugs and inconsistencies on the way:
+	- The energy attenuation cross-sections $L(E)$ and $\sigma_T(E)$ now have a (hopefully) reasonable behavior for low energies based on figures in the older Parks paper from 1977. $L(E)$ is only fitted for $E>20 \mathrm{eV}$. I set $L(E<20\mathrm{eV} = 0$. $\sigma_T(E)$ diverges for small energies, therefore I just used the formula in Parks' paper $\sigma_T(E<100\mathrm{eV}) \propto 1/E$.
+	- The singularity at $r=1$ is not stable for $E_\star \approx 100\mathrm{eV}$ since $d\Lambda/dE$ has a kink there
+	- The pellet radius is now defined as the maximum of $dE/dr$, since it diverges there. I choose this since it works the best and the solve_ivp function sometimes overshoots this point.
+	- The events in the solve_ivp function now trigger when any one quantity ($v^2,T,q,E$) passes 0 (negative values don't make sense) or if $v^2=T$ since the singularity would stop the integration either way.
+	- In the root finding function to find $\lambda_\star$, I set `tol=1e-5, options={"eps":1e-4}` , which fixed that it took too large steps in the beginning landing at negative $\lambda_\star$ values.
+	- The tolerances for the solve_ivp from r=1 down are now ` atol=[1e-10, 1e-10, 1e-10, 1e-3], rtol=1e-7,` This seems to be stable and very precise, and still not too slow
+- I realized that we will only have the zeroth order solution at some $r$ values which are almost randomly distributed. For the first order we probably need to do interpolation

@@ -53,7 +53,9 @@ Once $E_\star, \lambda_\star, r_p$ are determined, the ODE system can be integra
 
 With all relations outlined in [[numerics_outline_spherical_part.pdf]] (ignore the "make boundary value problem") one could now theoretically calculate all non-normalized values and the full zeroth order system is solved. ⛔ 
 
-Since this model needs $E_\star$ as an input, but in reality $E_{bg}$ is an input parameter, it is important to find a formula to calculate $E_\star(E_{bg})$. Additionally if one does not want to execute the whole algorithm, one would also need expressions for $\lambda_\star$, $r_p$ and $q_\star(q_{bg})$. Those relations are given in eq. 22 - 26 in [[Parks-1978]] and won't be refitted here. However, to evaluate if my algorithm is correct, I want to recreate figures 1, 2 and 4 in [[Parks-1978]]. 🔥
+Since this model needs $E_\star$ as an input, but in reality $E_{bg}$ is an input parameter, it is important to find a formula to calculate $E_\star(E_{bg})$. Additionally, if one does not want to execute the whole algorithm, one would also need expressions for $\lambda_\star$, $r_p$ and $q_\star(q_{bg})$. Those relations are given in eq. 22 - 26 in [[Parks-1978]] and won't be refitted here. However, to evaluate if my algorithm is correct, I want to recreate figures 1, 2 and 4 in [[Parks-1978]]. ✅
+![[recreated_Parks_E_inf.png]]
+![[ode0_solution_Estar_3.000e+04_gamma_7_5.png]]
 
 # Asymmetric perturbation to NGS (1st order)
 
