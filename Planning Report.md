@@ -59,7 +59,7 @@ Roughly separate but overlapping are the following steps of this project
 
 # Schedule
 
-![[Schedule.png.png]]
+![Schedule.png](Schedule.png.png)
 # References
 
 - Parks, P. B., and R. J. Turnbull. 1978. “Effect of Transonic Flow in the Ablation Cloud on the Lifetime of a Solid Hydrogen Pellet in a Plasma.” The Physics of Fluids 21 (10): 1735–41. https://doi.org/10.1063/1.862088.
