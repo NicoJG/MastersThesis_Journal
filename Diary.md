@@ -174,3 +174,17 @@
 	- In the root finding function to find $\lambda_\star$, I set `tol=1e-5, options={"eps":1e-4}` , which fixed that it took too large steps in the beginning landing at negative $\lambda_\star$ values.
 	- The tolerances for the solve_ivp from r=1 down are now ` atol=[1e-10, 1e-10, 1e-10, 1e-3], rtol=1e-7,` This seems to be stable and very precise, and still not too slow
 - I realized that we will only have the zeroth order solution at some $r$ values which are almost randomly distributed. For the first order we probably need to do interpolation
+
+## 2024-02-12
+
+- Group meeting
+- Supervision meeting:
+	-  I showed the recreated figures from Parks paper
+	- Oskar talked about one possible way to solve the 1st order ode numerically
+	- We have boundary conditions at 0, but potentially diverging derivatives and the zeroth order is not very well defined at the pellet radius
+	- So we basically want to treat it as a boundary value problem. We start somewhere close to the pellet radius with setting the quantities to some values, which we then vary until all boundary conditions are fulfilled.
+	- This sounds like a problem that's too complex, but maybe it will work
+	- I will have to stare at the normalized system of equations a bit to see if there are some other smart ways to solve the system
+	- Maybe we could even normalize the asymmetric values to their values at the sonic radius so that we know they are 1 there
+- I talked with Oskar afterwards, normalizing to the sonic radius is probably not worthwhile since we have no physics relations that could reduce the number of unknown parameters anyway
+- 
