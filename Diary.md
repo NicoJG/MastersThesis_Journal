@@ -187,4 +187,5 @@
 	- I will have to stare at the normalized system of equations a bit to see if there are some other smart ways to solve the system
 	- Maybe we could even normalize the asymmetric values to their values at the sonic radius so that we know they are 1 there
 - I talked with Oskar afterwards, normalizing to the sonic radius is probably not worthwhile since we have no physics relations that could reduce the number of unknown parameters anyway
-- 
+- I checked Oskars normalized set of equations (see [normalized_first_order_eqs](HandwrittenNotes/normalized_first_order_eqs.pdf)) and get exactly the same (I only found on factor 2 that was too much in Oskars equations) 
+- I thought if we can somehow do some clever stuff to either start at the pellet radius by finding ways around the diverging derivatives or start somewhere else but in some smart way. I did not come up with anything yet. I might just try it numerically the brute force way with 6 unknown parameters.
