@@ -189,3 +189,17 @@
 - I talked with Oskar afterwards, normalizing to the sonic radius is probably not worthwhile since we have no physics relations that could reduce the number of unknown parameters anyway
 - I checked Oskars normalized set of equations (see [normalized_first_order_eqs](HandwrittenNotes/normalized_first_order_eqs.pdf)) and get exactly the same (I only found on factor 2 that was too much in Oskars equations) 
 - I thought if we can somehow do some clever stuff to either start at the pellet radius by finding ways around the diverging derivatives or start somewhere else but in some smart way. I did not come up with anything yet. I might just try it numerically the brute force way with 6 unknown parameters.
+
+## 2024-02-13
+
+- Still no clever ideas
+- I checked the matrix equation form Oskar has brought the first order ode in. I get almost the same and he probably just had some small mistakes.
+- Tried to get a simpler matrix form by plugging everything into Mathematica. It spits out something but I don't know if I did everything correct and if the result is correct. 
+- I want to try out sympy. Maybe this yields the same or other results than Mathematica.
+
+## 2024-02-14
+
+- Used sympy to calculate the inverse matrix and the matrix product. Out comes a 6x6 matrix with very large expressions in the upper left 3x3 block.
+- I noticed that the facto $T-v^2$ appears infront of the first 3 rows of this matrix
+- After talking with Oskar we think it might be possible to use this singularity to eliminate 3 of the first order quantities since the derivatives should be finite at the sonic radius. Tomorrow I will try to use sympy to see if the system of equations for the singularity is useful somehow
+- Otherwise I will use the sympy expression for the matrix to calculate the matrix in every step
