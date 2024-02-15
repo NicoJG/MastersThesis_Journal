@@ -203,3 +203,25 @@
 - I noticed that the facto $T-v^2$ appears infront of the first 3 rows of this matrix
 - After talking with Oskar we think it might be possible to use this singularity to eliminate 3 of the first order quantities since the derivatives should be finite at the sonic radius. Tomorrow I will try to use sympy to see if the system of equations for the singularity is useful somehow
 - Otherwise I will use the sympy expression for the matrix to calculate the matrix in every step
+- Had a meeting with Josefine Proll, about a potential PhD in Greifswald
+	- She will connect theory and experiment
+	- I have to write her a summary of what my skills are, what I expect to learn and what skills I want to use
+
+## 2024-02-15
+
+- Using sympy, I rederived the singularity of the zeroth order ode (using L'Hopitals rule), to check it and to see how I can do it in sympy
+- Using sympy, I derived the first 3 rows of C at the sonic radius
+	- this matrix has rank 1. This means that applied to the first order quantities and setting it to equal 0 (since $T-v^2$ is 0 and the derivatives should be finite), all 3 equations are linearly dependent
+	- this would allow us to eliminate one of the unknown quantities at the sonic radius
+	- however, because of this singularity we would need to find an expression for the derivatives at the sonic radius using L'Hoptials rule
+- Using sympy, I tried to apply L'Hopitals rule on the first 3 rows of C. I am now unsure if I did it correctly.
+	- Lets call the first 3 rows of C : $C_1$ 
+	- $C_1$ has a common prefactor $1/(T-v^2)$
+	- I removed this prefactor and then calculated the derivative at the sonic radius
+	- Afterwards I also calculated the derivative of $T-v^2$ at the sonic radius and divided the matrix by it
+	- I did NOT apply the matrix on any vector and I think this is where I did it wrong
+	- This way I required that each component of $C_1$ must be finite and that each component times $T-v^2$ is equal to 0
+	- However, the matrix applied to the first order quantities vector must be finite not each matrix element itself
+- I think the singularity is not possible to solve using L'Hopitals rule, since we don't know the values at the sonic radius. Or at least it might be to complex to do it this way
+- I might just start bruteforcing the solution to the first order ode. Even though it might be possible to eliminate one unknown parameter, this reduction of 1 dimension might not be worth figuring out a way to deal with the singularity
+- The singularity will obviously still be there, but I might just hope that we don't need to evaluate the derivatives exactly at the sonic radius 
