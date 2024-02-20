@@ -225,3 +225,21 @@
 - I think the singularity is not possible to solve using L'Hopitals rule, since we don't know the values at the sonic radius. Or at least it might be to complex to do it this way
 - I might just start bruteforcing the solution to the first order ode. Even though it might be possible to eliminate one unknown parameter, this reduction of 1 dimension might not be worth figuring out a way to deal with the singularity
 - The singularity will obviously still be there, but I might just hope that we don't need to evaluate the derivatives exactly at the sonic radius 
+## 2024-02-19 and 2024-02-20
+
+- Supervision meeting gave me some ideas how to solve the first order system numerically
+	- I could try to use gradient based minimization methods
+	- I should calculate the cost function not exactly at the pellet radius, slightly besides it should be fine as a first estimate
+- Now I derived the derivatives at r=1 and a relation to calculate E1 at r=1
+- I should really update this Journal a bit more
+	- I should give details on how I solved the zeroth order numerically
+	- I should give details on the sympy derivations I did for the first order matrix C, it's L'Hopitals rule and the relation to eliminate E1
+	- Once I have found methods that work or do not work I should outline them here
+- I have discussed the boundary conditions with Oskar
+	- we are pretty sure the singularity relation got rid of one boundary condition but we don't know which
+	- maybe U1 and V1 actually don't have to go to 0 at the pellet radius
+- I have managed to find a solution using root, that seems pretty good, however, V1 does not go to 0
+	- I can't replicate finding this solution from starting guesses
+	- It might be just a local minimum
+	- scipy.minimize does not find anything to converge to
+- since I now check also the boundary conditions at infinity, it might be better to not eliminate E1 at the sonic radius, since we have a quite good starting guess for that
