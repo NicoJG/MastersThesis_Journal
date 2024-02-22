@@ -243,3 +243,15 @@
 	- It might be just a local minimum
 	- scipy.minimize does not find anything to converge to
 - since I now check also the boundary conditions at infinity, it might be better to not eliminate E1 at the sonic radius, since we have a quite good starting guess for that
+
+## 2024-02-21 and 2024-02-22
+
+- I tested around a lot to get a feel for the minimization process and what accuracy is achievable
+- It seems that V1(r_p)=0 is the boundary condition which when enforced also enforces U1(r_p)=0, P1(inf)=0 is always the case
+- A lot of what I did was to see how close the first order pellet radius estimate can get to the zeroth order r_p. 
+	- It seems to be the best strategy to use method="hybr" with, which can only handle 5 roots, first to get to some solution that is within 1e-4 to the r_p
+	- Then I use method="lm", which is least squares and can handle any number of roots, to go as close as 1e-7 to r_p and enfoce that all boundary conditions go to 0
+	- It might work to also have the closeness to r_p as a condition with some weight
+	- With this method I can get all boundary conditions fulfilled with at least 1e-5 accuracy
+	- I tested it for E_rel/q_rel = +-1
+	- this method seems to take somewhere between 3 and 10 minutes
