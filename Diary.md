@@ -255,3 +255,16 @@
 	- With this method I can get all boundary conditions fulfilled with at least 1e-5 accuracy
 	- I tested it for E_rel/q_rel = +-1
 	- this method seems to take somewhere between 3 and 10 minutes
+## 2024-02-23
+
+- The method seems to be reliable, I have tested it for the values $E_{rel}/q_{rel} = -2,-1.5,-1,-0.5,-0.1,0.1,0.5,1,2$
+- the first order solution shows some very interesting features
+	- around -1, V1 is just 0, going to higher fractions it becomes negative and lower fractions it becomes positive
+	- this causes P1 to become negative for fractions lower than ~(-1) and thus a force in the opposite direction than expected appears
+	- for fractions above ~(+0.5), T1, U1 and V1 are all negative, which seems a bit counter intuitive, since higher incoming heat flux and higher electron energy at $\theta=0$ suddenly means the temperature is higher at $\theta=\pi$ . 
+		- Maybe this can be explained by V1 being quite large (but negative) and thus the material is accumulated more towards the low flux side
+- I have spent some time to make my code run faster.
+	- Oskar gave me the tip to precompute the energy attenuation cross sections. This made me find solutions in 2 instead of 5 minutes.
+	- Through profiling I noticed that the interpolation and the calculation of matrix C are the most demanding and I made them a bit faster
+- I started to organize my code better
+- I have to continue organizing my code and I have to write and outline the procedures I use here in this journal
