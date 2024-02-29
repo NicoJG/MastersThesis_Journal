@@ -268,3 +268,13 @@
 	- Through profiling I noticed that the interpolation and the calculation of matrix C are the most demanding and I made them a bit faster
 - I started to organize my code better
 - I have to continue organizing my code and I have to write and outline the procedures I use here in this journal
+
+## 2024-02-29
+
+- today I summarized how to calculate the pellet rocket force after solving the first order differential equations. This is in the handwritten notes [force_from_normalized_1st_order](HandwrittenNotes/force_from_normalized_1st_order.pdf)
+- this includes deriving the force in terms of the normalized first order quantities
+- as well as deriving an expression for $p_\star$ , which Parks only gives already simplified
+- I also put at the end a list of all physical parameters our model depends on
+- To see if we can just simplify the dimensionless prefactor in $p_\star$ I also plotted it (see [p_star_dependence_on_E_bg](Images/p_star_dependence_on_E_bg.png))
+	- it seems to only depend very weakly on $E_\star$ and $\gamma$ a value of 0.04 might be sufficiently accurate
+	- the factor $E_{bg}/\Lambda_\star^{1/3}$ on the other hand is highly nonlinear in $E_{bg}$ 
