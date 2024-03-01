@@ -278,3 +278,9 @@
 - To see if we can just simplify the dimensionless prefactor in $p_\star$ I also plotted it (see [p_star_dependence_on_E_bg](Images/p_star_dependence_on_E_bg.png))
 	- it seems to only depend very weakly on $E_\star$ and $\gamma$ a value of 0.04 might be sufficiently accurate
 	- the factor $E_{bg}/\Lambda_\star^{1/3}$ on the other hand is highly nonlinear in $E_{bg}$ 
+
+## 2024-03-01
+
+- I searched for a way to make math work in both Obsidian and on GitHub, since GitHub has some trouble with displaying math. It does not seem to be possible to fix, so for now I stick with the way Obsidian does it. I created a [feature request topic in the Obsidian forum](https://forum.obsidian.md/t/github-gitlab-compatible-math-syntax-with-backticks/77834).
+- added my notes on going from the 6 differential equations for the first order to the matrix form $A \vec{y}' = B \vec{y}$ in [first_order_ode_as_matrix_vector_equation](HandwrittenNotes/first_order_ode_as_matrix_vector_equation.pdf). I have used those matrices $A$ and $B$ to calculate $C = A^{-1} \cdot B$ in sympy. (all of this I just added here today, but I have done it much earlier)
+- I started to restructure my code to make it more readable and have logical separations between plotting code, scanning code, algorithms and analytical expressions (i did not finish or test it)
