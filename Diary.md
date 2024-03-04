@@ -284,3 +284,12 @@
 - I searched for a way to make math work in both Obsidian and on GitHub, since GitHub has some trouble with displaying math. It does not seem to be possible to fix, so for now I stick with the way Obsidian does it. I created a [feature request topic in the Obsidian forum](https://forum.obsidian.md/t/github-gitlab-compatible-math-syntax-with-backticks/77834).
 - added my notes on going from the 6 differential equations for the first order to the matrix form $A \vec{y}' = B \vec{y}$ in [first_order_ode_as_matrix_vector_equation](HandwrittenNotes/first_order_ode_as_matrix_vector_equation.pdf). I have used those matrices $A$ and $B$ to calculate $C = A^{-1} \cdot B$ in sympy. (all of this I just added here today, but I have done it much earlier)
 - I started to restructure my code to make it more readable and have logical separations between plotting code, scanning code, algorithms and analytical expressions (i did not finish or test it)
+
+## 2024-03-04
+
+- On the weekend I have continued to restructure my code. Now I am almost satisfied with how organised it is. 
+- I also did a larger scan for the 0th order and included values of $E_\star$ of up to $10^6 eV$.
+- Today I mainly looked into how to get the first order optimization more stable.
+- A final minimization might be useful to get the accuracy even further, but it is quite time consuming and doesn't change P1 much (I think)
+- The main problem I have with the root finding is that it uses a tolerance in the input parameters to determine when it is done. However, I would like a tolerance on the boundary condition absolute values
+- My current approach is to do the root finding and if it does not find low enough boundary condition errors, I add some randomness to the y1sonic and restart the root finding. This is time consuming but mostly this is not guaranteed to find a solution. I would have to restrict the amounts it tries and if it does not find something I should return the best try.
