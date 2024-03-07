@@ -293,3 +293,17 @@
 - A final minimization might be useful to get the accuracy even further, but it is quite time consuming and doesn't change P1 much (I think)
 - The main problem I have with the root finding is that it uses a tolerance in the input parameters to determine when it is done. However, I would like a tolerance on the boundary condition absolute values
 - My current approach is to do the root finding and if it does not find low enough boundary condition errors, I add some randomness to the y1sonic and restart the root finding. This is time consuming but mostly this is not guaranteed to find a solution. I would have to restrict the amounts it tries and if it does not find something I should return the best try.
+## 2024-03-05 to 2024-03-07
+
+- I now check the boundary condition error sum to be reasonably low after the 1st and 2nd root finding method. If either fails, I try this one again with added randomness to the initial guess. This seemed to be quite stable. At least it is much more consistent than without checking the bc error.
+- One of the bottlenecks for the accuracy is that I have to stop the zeroth order solution when E is 20eV, since the energy attenuation cross sections are only defined until 20eV. I just hope that this is precise enough.
+- I changed the way I export sympy expressions to not use pickle but just write python code to a file
+- I performed a large scan of around 3000 different combinations of $\gamma,E_\star,(E_{rel}/q_{rel})$ 
+	- this took around 8 hours to run on my office computer and produced 8GB of data (because I save all full solutions), even with pythons multiprocessing
+	- now I can investigate pretty much anything about the found solutions for each parameter combination
+	- The main quantity we are interested in is the pressure perturbation, since this is the only quantity of the first order relevant for the force on the pellet (see [force_from_normalized_1st_order](HandwrittenNotes/force_from_normalized_1st_order.pdf))
+	- The result is that $P(r_p)$ is a linear function in $E_{rel}/q_{rel}$ with the slope depending weakly on $\gamma,E_\star$. Especially in the relevant range of $E_{rel}/q_{rel}$ around -1 I am certain that it is linear. Below is the corresponding plot (not paper ready) This is scanned from -10 to 10 with a step size of 0.1. I have not investigated if there is some non-linear behavior at $E_{rel}/q_{rel}=0$ but it seems very unlikely
+	  ![P1_at_r1_p_fine](Images/P1_at_r1_p_fine.png)
+  - Here is one example solution of the first order with showing all quantities and their derivatives on both logarithmic and linear scales for seeing all the details.  
+    ![ode1_sol_0489_Estar-1.0000e+04_gamma-1.667_relfraction--1.0000e+00](Images/ode1_sol_0489_Estar-1.0000e+04_gamma-1.667_relfraction--1.0000e+00.png)
+    
