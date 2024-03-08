@@ -1,4 +1,4 @@
-This document aims at giving all necessary details to reproduce exactly how this project computes the numerical solutions to the spherically symmetric part of the neutral ablation cloud around the pellet. This document basically serves as a documentation of the Python code of this project, but without the need to read any of the code. Most of this was done the same way for the "Neutral Gas Shielding model" in [Parks-1978](LiteratureNotes/Parks-1978.md) paper. I don't reference this paper here, but if some details are unclear here, it might help to look at the paper ([https://doi.org/10.1063/1.862088](https://doi.org/10.1063/1.862088)). But since the computing power is so much better nowadays, some other numerical methods are used, a higher precision could be achieved and a much greater parameter scan could be conducted.
+This document aims at giving all details to reproduce exactly how this project computes the numerical solutions to the spherically symmetric part of the neutral ablation cloud around the pellet. This document basically serves as a documentation of the Python code of this project, but without the need to read any of the code. Most of this was done the same way for the "Neutral Gas Shielding model" in [Parks-1978](LiteratureNotes/Parks-1978.md) paper. I don't reference this paper here, but if some details are unclear here, it might help to look at the paper ([https://doi.org/10.1063/1.862088](https://doi.org/10.1063/1.862088)). But since the computing power is so much better nowadays, some other numerical methods are used, a higher precision could be achieved and a much greater parameter scan could be conducted.
 
 To get an overview how this document fits into the whole project, read the [Project Summary](Project%20Summary.md).
 
@@ -98,6 +98,24 @@ Even though `solve_ivp` returns a flag whether it succeeded or not, I could not 
 
 # Optimizing $\lambda_\star$ 
 
+With the functions `solve_ode0_down` and `solve_ode0_up` yielding accurate solutions for all tested $\gamma, E_\star, \lambda_\star$, a method is needed to vary $\lambda_\star$ in such a way to efficiently and accurately find a value for which the solution satisfies $T(r_p) = q(r_p) = 0$ . After getting a feel for how $\lambda_\star$ changes the solution and testing different minimization and root-finding methods, the following is now how it is implemented in this project.
 
+Ideally, $\lambda_\star$ would be found in a minimization procedure for $|T(r_p)|+|q(r_p)|$. However, this turned out to be difficult to get convergence for. Instead, now this project uses a root-finding procedure through [scipy.optimize.root](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.root.html) to find the $\lambda_\star$ for which $T(r_p)-q(r_p)=0$.
 
+To explain why this root is equivalent to minimizing the boundary condition error, it is helpful to look at the solutions for three example $\lambda_\star$:
+![ode0_lambda_dependence_examples](Images/ode0_lambda_dependence_examples_gamma_1.4_Estar_3e4.png)
+The left solution has a $\lambda_\star$ that is too low, the center solution has a $\lambda_\star$ close to the optimal one and the right solution has a too large $\lambda_\star$. What this shows is that for low values, $T$ and $w$ go to 0 while $q$ does not and for high values $q$ goes to 0 while $T$ does not. Since it is ensured that all values stay positive, there is only one $\lambda_\star$ where $T(r_p)-q(r_p)=0$ and this is also the place where both $T(r_p)$ and $q(r_p)$ are 0. It also shows that for even larger $\lambda_\star$ the singularity $T=w$ can appear before $q$ has hit 0, which is the reason the starting guess for $\lambda_\star$ should be below the optimal value. Otherwise the root finding might fail or give a wrong result. (It is set to be $\lambda_\star = 0.5$ here)
 
+Testing different parameters of [scipy.optimize.root](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.root.html) lead to the following parameters, for which it seems to reliably find an accurate $\lambda_\star$ faster than other tested methods:
+- The used method is `method="hybr"`, which is "a modification of the Powell hybrid method as implemented in MINPACK"
+- `tol=1e-5` gives the accuracy with which $\lambda_\star$ should be found
+- `eps=1e-4` gives "a suitable step length for the forward-difference approximation of the Jacobian"
+
+# Calculate $p_\star$ and other quantities
+
+After having optimized $\lambda_\star$, the differential equations can be integrated upwards from $r=1$ to find  $q(r\rightarrow\infty)$ and $E(r\rightarrow\infty)$ as described above. A scan over $\gamma = (5/3),(7/5),(9/7)$ and 1000 values of $E_\star$ on a logarithmic scale leads to the following found quantities:
+![recreated_Parks_E_inf](Images/recreated_Parks_E_inf.png)  
+Versions of these plots can also be found in Parks paper and in the plots, the red lines are the scaling laws presented in the paper for $\gamma = 5/3$. Lower values of $E_{bg}$ cannot be computed because of the energy restrictions in the empirical cross sections.
+
+In theory all unknown quantities can be computed from these parameters. This is outlined in the second part of [force_from_normalized_1st_order](HandwrittenNotes/force_from_normalized_1st_order.pdf) with a focus on the only important quantity for this project, the pressure at the sonic radius $p_\star \approx 0.04$. The $E_{bg}$ dependence of $p_\star$ is very weak and is shown in the following.
+![p_star_dependence_on_E_bg](Images/p_star_dependence_on_E_bg.png)

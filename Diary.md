@@ -307,3 +307,7 @@
   - Here is one example solution of the first order with showing all quantities and their derivatives on both logarithmic and linear scales for seeing all the details.  
     ![ode1_sol_0489_Estar-1.0000e+04_gamma-1.667_relfraction--1.0000e+00](Images/ode1_sol_0489_Estar-1.0000e+04_gamma-1.667_relfraction--1.0000e+00.png)
 - Started writing a detailed documentation of my code for the numerical solution of the 0th order (in [Numerical procedure 0th order](Numerical%20procedure%200th%20order.md)), but I did not get very far
+
+## 2024-03-08 
+
+- Finished writing the detailed documentation of the [Numerical procedure 0th order](Numerical%20procedure%200th%20order.md).
