@@ -14,17 +14,21 @@ $$
     &\frac{dq}{dr} = \lambda _\star\frac{q\Lambda }{\sqrt{w}r^2},
 \end{align}
 $$  
-Where $\Lambda(E)$ and $L(E)$ are normalized empirical functions for the energy attenuation cross section, i.e. known functions of $E$. However, they depend on $E_\star$, which is an unknown. All sonic quantities could be combined into a single dimensionless unknown quantity $\lambda_\star = r_\star\Lambda _\star p_\star/T_\star$.
+Where $\Lambda(E)$ and $L(E)$ are normalized empirical functions for the energy attenuation cross section, i.e. known functions of $E$. However, they depend on $E_\star$, which is an unknown. All other sonic quantities could be combined into a single dimensionless unknown quantity $\lambda_\star = r_\star\Lambda _\star p_\star/T_\star$.
 Since we have normalized the quantities, we know their values at the sonic radius ($r=1$): 
 $$
-v(r=1)=1 \quad,\quad T(r=1)=1 \quad,\quad E(r=1)=1 \quad,\quad q(r=1)=1
+w(r=1)=1 \quad,\quad T(r=1)=1 \quad,\quad E(r=1)=1 \quad,\quad q(r=1)=1
 $$
 Boundary conditions that apply to the normalized quantities are:
 $$
 T(r_p)=0 \quad,\quad q(r_p)=0 \quad,\quad q(\infty)=q_{bg}/q_\star \quad,\quad E(\infty)=E_{bg}/E_\star \quad,\quad p(\infty)=0
 $$
-While the non-normalized pellet radius $\widetilde{r}_p$ is an input parameter, the normalized pellet radius $r_p$ is not known since $r_\star$ is not known.
+While the non-normalized pellet radius $\widetilde{r}_p$ is a model input parameter, the normalized pellet radius $r_p$ is not known a-priori, since $r_\star$ is not known.
 
-Goal of the procedure described here is to find numerical solutions for $w(r),T(r),E(r),q(r)$ which satisfy both the differential equations and the boundary conditions. 
+Goal of the procedure described here is to find numerical solutions for $w(r),T(r),E(r),q(r)$ which satisfy both the differential equations and the boundary conditions. For this purpose, for some chosen $\gamma$ and $E_\star$, we optimize $\lambda_\star$ so that $T(r_p) = q(r_p) = 0$ at some radius $r_p<1$ which is then interpreted as the normalized pellet radius. Together with the values $q(r\rightarrow\infty)$ and $E(r\rightarrow\infty)$ all unknown quantities can be determined and the full physical quantities could be calculated. 
 
-....
+```math
+test
+```
+
+# 
