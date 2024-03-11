@@ -311,3 +311,12 @@
 ## 2024-03-08 
 
 - Finished writing the detailed documentation of the [Numerical procedure 0th order](Numerical%20procedure%200th%20order.md).
+
+## 2024-03-11
+
+- Had to do some PhD application stuff
+- Supervision meeting:
+	- I updated everyone on the current status and what I did in the last 2 weeks (restructuring the code, documenting the 0th order code, deriving the final formula for the force, performing large parameter scan)
+	- next I need to write the documentation of the 1st order code and go through Oskars ideas on the shielding asymmetry through the ionized ablation cloud
+	- since Per Helander is here from 2024-04-08, I need to prepare some slides to be able to update him and present him the results
+- I updated the [Project Summary](Project%20Summary.md) 

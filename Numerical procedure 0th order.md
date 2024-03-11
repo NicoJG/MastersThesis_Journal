@@ -117,5 +117,5 @@ After having optimized $\lambda_\star$, the differential equations can be integr
 ![recreated_Parks_E_inf](Images/recreated_Parks_E_inf.png)  
 Versions of these plots can also be found in Parks paper and in the plots, the red lines are the scaling laws presented in the paper for $\gamma = 5/3$. Lower values of $E_{bg}$ cannot be computed because of the energy restrictions in the empirical cross sections.
 
-In theory all unknown quantities can be computed from these parameters. This is outlined in the second part of [force_from_normalized_1st_order](HandwrittenNotes/force_from_normalized_1st_order.pdf) with a focus on the only important quantity for this project, the pressure at the sonic radius $p_\star \approx 0.04$. The $E_{bg}$ dependence of $p_\star$ is very weak and is shown in the following.
+In theory all unknown quantities can be computed from these parameters. This is outlined in the second part of [force_from_normalized_1st_order](HandwrittenNotes/force_from_normalized_1st_order.pdf) with a focus on the only important quantity for this project, the pressure at the sonic radius $p_\star \approx 0.04$. The $E_{bg}$ dependence of $p_\star$ is very weak and is shown in the following (only the left plot is important).
 ![p_star_dependence_on_E_bg](Images/p_star_dependence_on_E_bg.png)
