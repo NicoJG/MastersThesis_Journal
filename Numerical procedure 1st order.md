@@ -34,7 +34,7 @@ All of this can be combined to perform a parameter scan and the results are show
 
 # Derivation of $C=A^{-1}\cdot B$ and handling of the sonic singularity
 
-As previously mentioned, the differential equation is of the form $\frac{d \vec{y}_1'}{dr} = C(r) \cdot \vec{y}_1(r)$, where $C=A^{-1}\cdot B$ has to be calculated from the derived expressions of $A$ and $B$ in [first_order_ode_as_matrix_vector_equation](HandwrittenNotes/first_order_ode_as_matrix_vector_equation.pdf). Therefore, what needs to be input manually as a SymPy expression is
+As previously mentioned, the differential equation is of the form $\frac{d \vec{y}_1'}{dr} = C(r) \cdot \vec{y}_1(r)$, where $C=A^{-1}\cdot B$ has to be calculated from the derived expressions of $A$ and $B$ in [first_order_ode_as_matrix_vector_equation](HandwrittenNotes/first_order_ode_as_matrix_vector_equation.pdf). Therefore, the starting expressions put into SymPy are
 $$
 A(r) = \begin{pmatrix}
 
@@ -72,8 +72,76 @@ v_0 \cdot \frac{d}{dr}(v_0)/T_0 & -v_0 \cdot \frac{d}{dr}(v_0) \cdot \rho_0/T_0 
 $$
 with the shorthands
 $$
-k_0 = 1/2\cdot \rho \cdot v^2 + p/(\gamma-1) \\
+k_0 = 1/2\cdot \rho_0 \cdot v_0^2 + p_0/(\gamma-1) \\
 $$
 $$
 \nabla \cdot \vec{v}_0 = \frac{1}{r^2} \cdot \frac{d}{dr}(r^2 \cdot v_0)
 $$
+and all quantities dependent on $r$ (or $E_0$) are taken to be `Function` objects while $r,\gamma,\lambda_\star$ are `Symbol` objects. In the following calculations performed by SymPy the function `simplify` is used frequently, after each step.
+
+$C=A^{-1}\cdot B$ is computed, and the following substitutions are used to eliminate $\rho_0, p_0, v_0$
+$$
+\rho_0 = p_0/T_0,\quad p_0=\frac{T_0}{r v_0^2}, \quad v_0 = \sqrt{w} \, .
+$$  
+The resulting expressions for the $3 \times 3$ sub blocks of 
+$$
+C = \begin{pmatrix}
+C_{11} & C_{12} \\
+C_{21} & C_{22}
+\end{pmatrix}
+$$  
+are (dropping the index 0, since only the zeroth order quantities appear, and generating LaTeX via SymPy)
+$$
+\begin{gather}
+C_{11} = \frac{1}{T-v^2} \left[\begin{matrix}- \frac{2 \Lambda \gamma q \sqrt{w}}{T} + \frac{2 \gamma w}{r} & \frac{2 \Lambda \gamma q}{T r^{2}} + \frac{\gamma \frac{d}{d r} w}{2 r^{2} \sqrt{w}} & \frac{\gamma \left(- T \frac{d}{d r} w + w \left(\frac{\gamma \frac{d}{d r} w}{2} + \frac{d}{d r} T - \frac{\frac{d}{d r} w}{2}\right)\right)}{r^{2} w}\\\frac{r \left(- 2 \Lambda \gamma q r w + T \left(2 \Lambda q r + 2 \gamma w^{\frac{3}{2}} - r \sqrt{w} \frac{d}{d r} T - 2 w^{\frac{3}{2}}\right) + r w^{\frac{3}{2}} \frac{d}{d r} T\right)}{T} & - \frac{2 \Lambda q}{\sqrt{w}} + \frac{2 \Lambda \gamma q \sqrt{w}}{T} + \frac{\gamma \frac{d}{d r} w}{2} + \frac{d}{d r} T - \frac{\frac{d}{d r} w}{2} - \frac{w \frac{d}{d r} T}{T} & \frac{- \frac{3 T \gamma \frac{d}{d r} w}{2} - T \frac{d}{d r} T + \frac{3 T \frac{d}{d r} w}{2} + \frac{\gamma^{2} w \frac{d}{d r} w}{2} + \gamma w \frac{d}{d r} T - \frac{\gamma w \frac{d}{d r} w}{2}}{\sqrt{w}}\\\frac{r \left(2 \Lambda q r \sqrt{w} - \frac{T r \frac{d}{d r} w}{2} - 2 T w + \frac{r w \frac{d}{d r} w}{2}\right)}{T} & \frac{- 2 \Lambda q - \frac{\sqrt{w} \frac{d}{d r} w}{2}}{T} & \frac{T \frac{d}{d r} w}{2 w} - \frac{\gamma \frac{d}{d r} w}{2} - \frac{d}{d r} T + \frac{d}{d r} w\end{matrix}\right]
+\\C_{12} = \frac{1}{T-v^2} \left[\begin{matrix}- \frac{2 T \gamma}{r^{3}} & - \frac{2 \Lambda \gamma}{r^{2}} & - \frac{2 \gamma q \frac{d}{d E} \Lambda}{r^{2}}\\\frac{2 T \sqrt{w} \left(1 - \gamma\right)}{r} & \frac{2 \Lambda \left(T - \gamma w\right)}{\sqrt{w}} & \frac{2 q \left(T - \gamma w\right) \frac{d}{d E} \Lambda}{\sqrt{w}}\\\frac{2 T}{r} & 2 \Lambda & 2 q \frac{d}{d E} \Lambda\end{matrix}\right]
+\\C_{21} =  \left[\begin{matrix}- \frac{r}{\gamma} & 0 & 0\\\frac{\Lambda \lambda q}{T} & - \frac{\Lambda \lambda q}{T r^{2} \sqrt{w}} & 0\\\frac{2 L \lambda}{T} & - \frac{2 L \lambda}{T r^{2} \sqrt{w}} & 0\end{matrix}\right]
+\\C_{22} =  \left[\begin{matrix}- \frac{1}{r} & 0 & 0\\0 & \frac{\Lambda \lambda}{r^{2} \sqrt{w}} & \frac{\lambda q \frac{d}{d E} \Lambda}{r^{2} \sqrt{w}}\\0 & 0 & \frac{2 \lambda \frac{d}{d E} L}{r^{2} \sqrt{w}}\end{matrix}\right]
+\end{gather}
+$$  
+Since the numerical procedure needs to generate this matrix often, it is exported as Python code using the SymPy function `lambdify`. Apart from avoiding copying errors, this function also makes the computation more efficient since it can automatically identify common subexpressions (`cse` keyword).
+
+Keeping in mind the zeroth order numerical procedures, it is apparent that the first 3 rows of $C$ are singular for $T=w$, which is the case at the sonic radius $r=1$. To handle this singularity, let us define
+$$
+D = (T-w) \cdot C
+$$ and let $D_1$ be the first 3 rows of $D$. The only way that the derivatives at the sonic radius can be finite then is if $$
+D_1(r=1)\cdot \vec{y}_1(r=1) = 0\, ,$$  
+because then the right side of the matrix differential equation becomes "$0/0$" which can be finite and evaluated using L'Hopitals rule. To see if this condition is always fulfilled, $D_1(r=1)$ is calculated by inserting the zeroth order quantities at $r=1$. The result is
+$$
+D_{1}(r=1) =  \left[\begin{matrix}0 & \gamma \left(\frac{\chi}{2} + 2\right) & \gamma \left(2 - \chi\right) & - 2 \gamma & - 2 \gamma & - \frac{\Psi \gamma}{\lambda L{\left(1 \right)}}\\0 & \frac{\chi \left(\gamma - 1\right)}{2} + 2 \gamma - 2 & - \chi \gamma + \chi + 2 \gamma - 2 & 2 - 2 \gamma & 2 - 2 \gamma & \frac{\Psi \left(1 - \gamma\right)}{\lambda L{\left(1 \right)}}\\0 & - \frac{\chi}{2} - 2 & \chi - 2 & 2 & 2 & \frac{\Psi}{\lambda L{\left(1 \right)}}\end{matrix}\right]
+$$  
+where $\Psi=\Psi_\star$ and $\chi=\chi_\star$ are defined in the zeroth order. This matrix is of rank 1 and requiring $D_1(r=1)\cdot \vec{y}_1(r=1)=0$ can be used to express one unknown of $\vec{y}_1(r=1)$ in terms of the other quantities (except for $P_1(r=1)$).
+
+Now that "$0/0$" for the first 3 rows of $C(r=1)\cdot \vec{y}_1(r=1)$ is ensured, L'Hopitals rule can be used. For convenience, it is applied to all 6 rows of the differential equation  (L'Hopitals rule can also be applied to non-singular terms) through
+$$
+
+\begin{align}
+
+\lim_{r\rightarrow 1} \vec{y}' &= \lim_{r\rightarrow 1} \frac{1}{\frac{d}{dr}(T-w)} \frac{d}{dr} \left( D \vec{y} \right) \\
+
+&= \lim_{r\rightarrow 1} \frac{1}{\frac{d}{dr}(T-w)} \left( D' \vec{y} + D\vec{y}' \right) \\
+
+\Leftrightarrow \lim_{r\rightarrow 1} \left(\frac{d}{dr}(T-w)\mathbb{1}_{6x6} - D \right) \vec{y}' &= \lim_{r\rightarrow 1} D' \vec{y} \\
+
+\Leftrightarrow \lim_{r\rightarrow 1} \vec{y}' = \lim_{r\rightarrow 1} \left(\frac{d}{dr}(T-w)\mathbb{1}_{6x6} - D \right)^{-1} D' \vec{y} 
+\end{align}
+$$
+
+Defining the matrix
+$$
+
+C_\star = \lim_{r\rightarrow 1} \left(\frac{d}{dr}(T-w)\mathbb{1}_{6x6} - D \right)^{-1} D' \\
+
+\Rightarrow \vec{y}'(r=1) = C_\star \vec{y}(r=1)
+
+$$  
+shows, that it is needed to calculate $D'(r=1)$ and $\left((T-w)\mathbb{1}_{6x6} - D \right)^{-1}|_{r=1}$. The resulting expression is too large to display here and is also for convenience exported as Python code via `lambdify`. The only new expression appearing in $C_\star$ is
+$$
+\Xi = 4 \lambda L^2|_{E=1} \frac{d^2 \Lambda}{dE^2}|_{E=1}
+$$
+
+# Calculating the derivatives numerically
+
+Now that expressions for $C,C_\star$ are found and made usable as Python code returning Numpy arrays the first order differential equation can be calculated for a given $\vec{y}_1(r)$ yielding $\frac{d\vec{y}_1}{dr}$.
+
+
