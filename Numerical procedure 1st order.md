@@ -5,7 +5,11 @@ To get an overview how this document fits into the whole project, read the [Proj
 
 # Introduction
 
-The $\theta$-dependence of the neutral ablation cloud fluid dynamics are taken as at perturbation to the zeroth order of the form $T(\vec{r}) = T_0(r) + \sum_l T_l(r) \cdot X_l(\theta)$ , where $X_l(\theta)$ are the [associated Legendre polynomials](https://en.wikipedia.org/wiki/Associated_Legendre_polynomials). Important for the pellet rocket force is only the $l=1$ mode ($X_1(\theta)=\cos\theta$). A system of 6 differential equations describing the 6 physical quantities $\vec{y}_1(r)=\left[P_1(r), T_1(r), U_1(r), V_1(r),Q_1(r),E_1(r) \right]^T$ is derived in [full_derivation_more_clean](HandwrittenNotes/full_derivation_more_clean.pdf). For convenience and consistency with the code, slightly different symbols are used here than in the derivations, for example $E_1$ instead of $\mathcal{E}_1$. 
+The $\theta$-dependence of the neutral ablation cloud fluid dynamics are taken as at perturbation to the zeroth order of the form $T(\vec{r}) = T_0(r) + \sum_l T_l(r) \cdot X_l(\theta)$ , where $X_l(\theta)$ are the [associated Legendre polynomials](https://en.wikipedia.org/wiki/Associated_Legendre_polynomials). Important for the pellet rocket force is only the $l=1$ mode ($X_1(\theta)=\cos\theta$). A system of 6 differential equations describing the 6 physical quantities 
+$$
+\vec{y}_1(r)=\left[P_1(r), T_1(r), U_1(r), V_1(r),Q_1(r),E_1(r) \right]^T
+$$  
+ is derived in [full_derivation_more_clean](HandwrittenNotes/full_derivation_more_clean.pdf). For convenience and consistency with the code, slightly different symbols are used here than in the derivations, for example $E_1$ instead of $\mathcal{E}_1$. 
 
 The quantities are normalized using their values at the sonic radius (denoted with a star) and the relative asymmetry factor of the background heat flux $q_{rel}$ in the normalized form $P_1 = \widetilde{P}_1/p_\star q_{rel}$ and the new system of differential equations is derived in [normalized_first_order_eqs](HandwrittenNotes/normalized_first_order_eqs.pdf). It is written in the matrix-vector form 
 $$A(r) \cdot \frac{d \vec{y}_1'}{dr} = B(r) \cdot \vec{y}_1(r) \quad \Leftrightarrow \quad \frac{d \vec{y}_1'}{dr} = C(r) \cdot \vec{y}_1(r)$$  
@@ -54,7 +58,7 @@ A(r) = \begin{pmatrix}
 $$
 and
 $$
-B = \begin{pmatrix}
+B(r) = \begin{pmatrix}
 
 v_0 \cdot \frac{d}{dr}(1/T_0) + (\nabla \cdot \vec{v_0})/T_0 & -v_0 \cdot \frac{d}{dr}(\rho_0/T_0)-(\nabla \cdot \vec{v_0}) \cdot \rho_0/T_0 & \frac{d}{dr}(\rho_0)+2 \cdot \rho_0/r & -2 \cdot \rho_0/r & 0 & 0 \\
 
@@ -83,7 +87,7 @@ $C=A^{-1}\cdot B$ is computed, and the following substitutions are used to elimi
 $$
 \rho_0 = p_0/T_0,\quad p_0=\frac{T_0}{r v_0^2}, \quad v_0 = \sqrt{w} \, .
 $$  
-The resulting expressions for the $3 \times 3$ sub blocks of 
+The resulting expressions for the $3 \times 3$ subblocks of 
 $$
 C = \begin{pmatrix}
 C_{11} & C_{12} \\
@@ -101,7 +105,7 @@ C_{11} = \frac{1}{T-v^2} \left[\begin{matrix}- \frac{2 \Lambda \gamma q \sqrt{w}
 $$  
 Since the numerical procedure needs to generate this matrix often, it is exported as Python code using the SymPy function `lambdify`. Apart from avoiding copying errors, this function also makes the computation more efficient since it can automatically identify common subexpressions (`cse` keyword).
 
-Keeping in mind the zeroth order numerical procedures, it is apparent that the first 3 rows of $C$ are singular for $T=w$, which is the case at the sonic radius $r=1$. To handle this singularity, let us define
+Keeping in mind the zeroth order numerical procedures, it is apparent that the first 3 rows of $C$ are singular for $T_0=w_0$, which is the case at the sonic radius $r=1$. To handle this singularity, let us define
 $$
 D = (T-w) \cdot C
 $$ and let $D_1$ be the first 3 rows of $D$. The only way that the derivatives at the sonic radius can be finite then is if $$
@@ -112,7 +116,7 @@ D_{1}(r=1) =  \left[\begin{matrix}0 & \gamma \left(\frac{\chi}{2} + 2\right) & \
 $$  
 where $\Psi=\Psi_\star$ and $\chi=\chi_\star$ are defined in the zeroth order. This matrix is of rank 1 and requiring $D_1(r=1)\cdot \vec{y}_1(r=1)=0$ can be used to express one unknown of $\vec{y}_1(r=1)$ in terms of the other quantities (except for $P_1(r=1)$).
 
-Now that "$0/0$" for the first 3 rows of $C(r=1)\cdot \vec{y}_1(r=1)$ is ensured, L'Hopitals rule can be used. For convenience, it is applied to all 6 rows of the differential equation  (L'Hopitals rule can also be applied to non-singular terms) through
+Now that "$0/0$" is ensured for the first 3 rows of $C(r=1)\cdot \vec{y}_1(r=1)$, L'Hopitals rule can be used. For convenience, it is applied to all 6 rows of the differential equation  (L'Hopitals rule can also be applied to non-singular terms) through
 $$
 
 \begin{align}
@@ -135,13 +139,34 @@ C_\star = \lim_{r\rightarrow 1} \left(\frac{d}{dr}(T-w)\mathbb{1}_{6x6} - D \rig
 \Rightarrow \vec{y}'(r=1) = C_\star \vec{y}(r=1)
 
 $$  
-shows, that it is needed to calculate $D'(r=1)$ and $\left((T-w)\mathbb{1}_{6x6} - D \right)^{-1}|_{r=1}$. The resulting expression is too large to display here and is also for convenience exported as Python code via `lambdify`. The only new expression appearing in $C_\star$ is
+shows, that it is needed to calculate $D'(r=1)$ and $\left((T-w)\mathbb{1}_{6x6} - D \right)^{-1}|_{r=1}$. The resulting expression is too large to display here and is also for convenience exported as Python code via `lambdify`. The only new expression appearing in $C_\star$ is (`Xi`)
 $$
 \Xi = 4 \lambda L^2|_{E=1} \frac{d^2 \Lambda}{dE^2}|_{E=1}
 $$
 
 # Calculating the derivatives numerically
 
-Now that expressions for $C,C_\star$ are found and made usable as Python code returning Numpy arrays the first order differential equation can be calculated for a given $\vec{y}_1(r)$ yielding $\frac{d\vec{y}_1}{dr}$.
+Now that expressions for $C,C_\star$ are found and made usable as Python code returning Numpy arrays, the first order differential equation can be calculated for a given $\vec{y}_1(r)$ yielding $\frac{d\vec{y}_1}{dr}$. The needed inputs are also the full zeroth order solution $\vec{y}_0(r), \vec{y}'_0(r)$ including the values of $r$ for which it is provided. Since the energy attenuation cross-sections $[L,L',\Lambda,\Lambda']$ are needed so often, it is expected that those are pre-computed for the given zeroth order solution.
+
+Similarly to the zeroth order, there is a singularity at $r=1$ and therefore the matrix $C_\star$ is calculated and used as $C_\star\cdot\vec{y}_1$ if $|r-1|\leq 10^{-3}$ (arbitrarily chosen precision).
+
+If $r$ is not close to the sonic radius, $C$ needs to be calculated and used as $C\cdot\vec{y}_1$. For this, $\vec{y}_0(r)$ is needed. It is expected that a full zeroth order solution is available, but it is highly unlikely that the solution uses the same $r$ values. Therefore, $\vec{y}_0(r),\vec{y}_0(r)$ and $[L,L',\Lambda,\Lambda']$ are approximated through [linear interpolation](https://en.wikipedia.org/wiki/Linear_interpolation)
+$$
+f_0(r) \approx \frac{f_0(r_\text{below}) \cdot (r_\text{above}-r) + f_0(r_\text{above})\cdot (r-r_\text{below})}{r_\text{above}-r_\text{below}}
+$$
+between the two nearest given solutions.
+# Solving the ODE from $r=1$ 
+
+As mentioned above, the apparent singularity at $r=1$ allows for elimination of one unknown in $\vec{y}_1(r=1)$. The vector is still expected to contain 6 quantities in order to make it clear that 
+$$
+\vec{y}_1(r)=\left[P_1(r), T_1(r), U_1(r), V_1(r),Q_1(r),E_1(r) \right]^T
+$$  
+However, one of those quantities is expected to be given as `numpy.NaN` and the other quantities are the values at the sonic radius, which means that this one quantity will be calculated through the relations found through SymPy.  For example
+$$
+U_1 = \frac{-E_1 \Psi_\star - 2 L_\star Q_1 \lambda_\star + (1/2) L_\star T_1 \chi_\star \lambda_\star + 2 L_\star T_1 \lambda_\star - 2 L_\star V_1 \lambda_\star}{L_\star \lambda_\star (\chi_\star - 2)}
+$$  
+
+
+
 
 
