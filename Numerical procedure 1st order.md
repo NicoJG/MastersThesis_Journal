@@ -161,12 +161,63 @@ As mentioned above, the apparent singularity at $r=1$ allows for elimination of 
 $$
 \vec{y}_1(r)=\left[P_1(r), T_1(r), U_1(r), V_1(r),Q_1(r),E_1(r) \right]^T
 $$  
-However, one of those quantities is expected to be given as `numpy.NaN` and the other quantities are the values at the sonic radius, which means that this one quantity will be calculated through the relations found through SymPy.  For example
+However, one of those quantities (except $P_1$) is expected to be given as `numpy.NaN` and the other quantities are the values at the sonic radius, which means that this one quantity will be calculated through the relations found through SymPy.  For example
 $$
 U_1 = \frac{-E_1 \Psi_\star - 2 L_\star Q_1 \lambda_\star + (1/2) L_\star T_1 \chi_\star \lambda_\star + 2 L_\star T_1 \lambda_\star - 2 L_\star V_1 \lambda_\star}{L_\star \lambda_\star (\chi_\star - 2)}
 $$  
+Now that the initial values at $r=1$ are set, the solution is found both downwards and upwards using  [scipy.optimize.solve_ivp](https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_ivp.html). The $r$ values of the zeroth order solution restrict the range in which the first order can be solved. The lower limit for the integration is the $r_p$ found in the zeroth order and the upper limit is the maximum $r$ of the zeroth order. Therefore, using the event functions of `solve_ivp` to trigger an end point is not necessary here. 
+Event functions are still used in the downwards integration to find accurate values of the solution for the roots of $T_1,U_1,V_1,Q_1$ because they are used for the boundary conditions in the next step. Even though it is not necessary, the upwards integration is terminated once $|dQ_1/dr|+|dE_1/dr|<10^{-10}$, like in the zeroth order procedure.
 
+Both calls of `solve_ivp` use the following arbitrarily chosen parameters:
+- `atol=1e-10` to have a high precision near 0
+- `rtol=1e-5` to have a precision of 5 decimals after the comma
+- `method="BDF"`, "Implicit multi-step variable-order (1 to 5) method based on a backward differentiation formula for the derivative approximation", since testing has shown that it is the fastest method and still yields accurate results
+- only from $r=1$ down to $r=r_p$: `max_step=0.01` to ensure a smooth curve and enough sampling
 
+# Optimizing $\vec{y}_1(r=1)$
 
+While for the zeroth order only one unknown parameter ($\lambda_\star$) has to be optimized so that the solution satisfies the boundary conditions, the first order has 5 unknowns in $\vec{y}_1(r=1)$. This leads to a slightly more challenging procedure.
 
+The boundary conditions are
+$$
+\begin{gather}
+T_1(r_p) = 0,\quad Q_1(r_p)=0,\quad U_1(r_p)=0,\quad V_1(r_p)=0 \\
+P_1(\infty) = 0,\quad Q_1(\infty)=q_0(\infty),\quad E_1(\infty)=E_0(\infty)\cdot\frac{E_{rel}}{q_{rel}}
+\end{gather}
+$$
+and the function `bc_residuals` calculates how much the found numerical solution deviates from these boundary conditions. (returned as an array) 
+It turns out that requiring the boundary conditions at exactly the found pellet radius of the zeroth order is not possible. Therefore, the numerical procedure used here tries to find a pellet radius $r_{1,p}$ at which the boundary conditions are satisfied and which is very close to the zeroth order pellet radius $r_{0,p}$. (for now, this is an additional boundary condition $r_{1,p}\approx r_{0,p}$)
 
+Therefore, before calculating the boundary condition residuals of a found solution, the best position of the pellet radius $r_{1,p}$ has to be found. This is done by the function `find_best_r1_p`. As mentioned above, the downwards call of `solve_ivp` contains event functions for the roots of $T_1,U_1,V_1,Q_1$ which do not terminate the integration. These roots are not part of the solution vector (since they are found in `solve_ivp` through linear interpolation) but they are considered as possible $r_{1,p}$ (and are often chosen). $r_{1,p}$ is chosen to be the radius in the range $r \in [r_{0,p},r_{0,p}+\Delta r_p]$ in the found solution $\vec{y}_1(r)$ for which $(|T_1|+|U_1|+|V_1|+|Q_1|)$ is the smallest. $\Delta r_p$ is a restricting parameter to be chosen during root finding.
+
+Given a chosen $\gamma,E_\star,(E_{rel}/q_{rel})$ and the corresponding zeroth order solution, $\vec{y}_1(r=1)$ is optimized using  [scipy.optimize.root](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.root.html) in the function `find_ode1_params`. The unknown in  $\vec{y}_1(r=1)$ chosen to be eliminated through the relation found by requiring finite derivatives is $U_1(r=1)$ since testing has shown that varying this quantity only slightly impacts the result of `solve_ivp` the most. However, it does not seem to matter which quantity is eliminated and a different one could also be chosen. 
+If no guess for $\vec{y}_1(r=1)$ is provided, the default guess is arbitrarily chosen to be 
+$$
+P_1(1)=0.1,\quad T_1(1)=2q_0(\infty),\quad V_1(1)=0.1, Q_1(1)=q_0(\infty),\quad E_1(1)=E_0(\infty)\cdot \frac{E_{rel}}{q_{rel}}
+$$  
+In order to improve convergence and to bring $r_{1,p}$ close to $r_{0,p}$ the root finding is split into two steps. In the first step the $r_{1,p}$ is only loosely restricted by setting $\Delta r_p = 10^{-3}$. The resulting $\vec{y}_1(r=1)$ is then used to find a more accurate solution by choosing $\Delta r_p = 10^{-7}$. 
+The parameters used in `scipy.optimize.root` are
+- `method="hybr"`, which is "a modification of the Powell hybrid method as implemented in MINPACK"
+	- this method has shown much faster and reliable convergence than any other method provided in `root`
+	- the number of output variables this method tries to find a root of has to be the same as the number of parameters to optimize. Therefore only 5 of the boundary conditions could be used. Testing has shown that $P_1(\infty)$ is always fulfilled. And $U_1(r_p)=0$ is always fulfilled at least very close to $r_{1,p}$ (but rarely at exactly $r_{1,p}$).
+- `eps=5e-5` as a suggestion for the step size
+- the parameter `xtol` describes the tolerance in $\vec{y}_1(r=1)$ at which the algorithm should stop. Since the first step is only to find a first good guess it has `xtol=1e-4`. The second step should yield an accurate solution therefore it has `xtol=1e-10`.
+
+Testing has shown that the starting guess can matter sometimes and the algorithm might not find a $\vec{y}_1(r=1)$ for which the boundary conditions are satisfied accurately enough. Therefore, both steps of this procedure are tested for how well they satisfy the boundary conditions. If the step does not show good convergence, it is repeated up to 4 times with slightly altered initial guesses.
+- The step is accepted if the sum of the boundary condition residuals is $\leq \varepsilon$ , where $\varepsilon = 10^{-3}$ for the first step and $\varepsilon = 2\cdot 10^{-4}$ for the second step
+- The new initial guess is the output of the failed step with random noise added to it. For the first step the random noise is in the range $[-1,1]$ and for the second step it is in the range $[-0.01,0.01]$.
+- If the step still does not converge after 5 tries, a warning is printed, however the result is still returned.
+
+# Results
+
+With a reliable procedure to solve the first order differential equation and optimize the free parameters in $\vec{y}_1(r=1)$, it it possible to perform parameter scans. The parameters to scan over are $\gamma,E_\star,(E_{rel}/q_{rel})$. For each parameter combination the optimization is performed. A sample solution is shown in the following figure, with the most important plot on the top right, where $\vec{y}_1(r)$ is shown on linear scales.
+![ode1_sol_0489_Estar-1.0000e+04_gamma-1.667_relfraction--1.0000e+00](Images/ode1_sol_0489_Estar-1.0000e+04_gamma-1.667_relfraction--1.0000e+00.png)
+
+For the pellet rocket effect, the most important quantity is $P_1(r_p)$, which is shown in the following figure.
+![P1_at_r1_p_fine](Images/P1_at_r1_p_fine.png)
+It shows that the dependence on $(E_{rel}/q_{rel})$ is linear and the slope depends weakly on $\gamma,E_\star$. (TODO: perform linear fits) The parameter scan includes 100 values of $(E_{rel}/q_{rel})$ between $[0.1,10]$, 20 values between $[20,10^6]$ and the same with negative values. All parameter ranges show a purely linear dependence.
+
+To validate the correctness of the found solutions, the sum of the boundary condition residuals are shown in the following figure.
+![bc_error_sum_1st_order](Images/bc_error_sum_1st_order.png)
+It shows that for values of $(E_{rel}/q_{rel})$ between $[-10,10]$ all solutions satisfy the boundary condtion with a reasonable accuracy. However, for larger orders of magnitude the error grows linearly. Investigating each individual boundary condition shows that the largest contribution to this error is $U_1(r_{1,p})$, which is expected as it is not optimized by the root finding algorithm. However looking at the solutions it seems like this boundary condition is always fulfilled close to $r_{1,p}$. The fact that $P_1(r_p)$ shows this purely linearly dependence suggests that all solutions are accurate enough. No clear strategy could be found thus far to ensure and show that $P_1(r_p)$ is accurate though.
+One additional contribution to the growing boundary condition error is that for large values of $(E_{rel}/q_{rel})$ the convergence towards $r \rightarrow \infty$ is slower and the limited range of the zeroth order is not long enough for all first order quantities to converge. Potentially this scan has to be performed with setting the tolerance for convergence at infinity of the zeroth order to be lower so that more of the solution is calculated and available to the first order. All of this would likely not change the result.
