@@ -320,3 +320,10 @@
 	- next I need to write the documentation of the 1st order code and go through Oskars ideas on the shielding asymmetry through the ionized ablation cloud
 	- since Per Helander is here from 2024-04-08, I need to prepare some slides to be able to update him and present him the results
 - I updated the [Project Summary](Project%20Summary.md) 
+
+# 2024-03-19 to 2024-03-21
+
+- went over Oskars ideas on the heat flux asymmetry
+- checked his derivations and made the reasoning more clear for myself
+	- look into [plasma_cloud_shielding](HandwrittenNotes/plasma_cloud_shielding.pdf)
+- 
