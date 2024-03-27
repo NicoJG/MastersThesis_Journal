@@ -1,6 +1,6 @@
 This document is supposed to give an overview of the project without going into all details.
 It should refer to other notes or documents that contain the necessary details. It should also state which parts of the project are done (provisionally) and potentially where I'm working on. As the steps of this project might change, this is an evolving document, unlike the planning report, which was how we envisioned the project at the start.
-Oskars summary is more detailed and includes all necessary details. (see [Summary_by_Oskar_2024-02-09](CollaborationDocuments/Summary_by_Oskar_2024-02-09.pdf))
+Oskars summary is more detailed than this document and includes all necessary details. (see [Summary_by_Oskar_2024-02-09](CollaborationDocuments/Summary_by_Oskar_2024-02-09.pdf)) The other notes I refer to here give the full derivations and are therefore even more detailed.
 
 ✅ -> Done  
 🔥 -> Currently working on  
@@ -47,15 +47,26 @@ While the non-normalized pellet radius $\bar{r}_p$ is an input parameter, the no
 The normalized set of equations has two unknown parameters ($E_\star$ and $\lambda_\star$). If those parameters are known, the equations can be integrated starting from $r=1$.
 So most of the work done in this part is to find values of $E_\star$ and $\lambda_\star$ for which all of the boundary conditions are fulfilled and by that also infer the unknown boundary $r_p$ . The full detail of this part are written in [Numerical procedure 0th order](Numerical%20procedure%200th%20order.md), but the following is a short summary.
 
-The first step is to choose some $E_\star$ (similar order of magnitude as $E_{bg}$) and $\lambda_\star$ (between 0 and 1). Then solve the initial value problem from $r=1$ downwards numerically. Here, I use the function [scipy.integrate.solve_ivp](https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_ivp.html). Evaluate if there is a point where both $T$ and $q$ go to 0. If it is not fulfilled sufficiently vary $\lambda_\star$ until you find one where all boundary conditions are fulfilled. For this purpose I use [scipy.optimize.root](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.root.html) to find the $\lambda_\star$ where $(T(r_p)-q(r_p))$ crosses 0. ✅ 
+The first step is to choose some $E_\star$ (similar order of magnitude as $E_{bg}$) and $\lambda_\star$ (between 0 and 1). Then solve the initial value problem from $r=1$ downwards numerically. Here, I use the function [scipy.integrate.solve_ivp](https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_ivp.html). Evaluate if there is a point where both $T$ and $q$ go to 0. If it is not fulfilled sufficiently vary $\lambda_\star$ until you find one where all boundary conditions are fulfilled. For this purpose I use [scipy.optimize.root](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.root.html) to find the $\lambda_\star$ where $(T(r_p)-q(r_p))$ crosses 0.  ✅
+
+One example solution, which is also shown in figure 4 of [Parks-1978](LiteratureNotes/Parks-1978.md) is shown in the following figure.
+![ode0_solution_Estar_3.000e+04_gamma_7_5](Images/ode0_solution_Estar_3.000e+04_gamma_7_5.png)
 
 Once $E_\star, \lambda_\star, r_p$ are determined, the ODE system can be integrated from $r=1$ upwards until $q$ and $E$ are converged to some constant value. This is needed to calculate which $E_{bg}$ the chosen $E_\star$ corresponds to. $q_{bg}$ can then be calculated through eq. 1 in Parks, which would yield $q_\star$. ✅ 
 
-With all relations outlined in [numerics_outline_spherical_part](HandwrittenNotes/numerics_outline_spherical_part.pdf) (ignore the "make boundary value problem") one could now theoretically calculate all non-normalized values and the full zeroth order system is solved. For this project, only $p_\star$ needs to be calculated additionally, which is outlined in the second part of [force_from_normalized_1st_order](HandwrittenNotes/force_from_normalized_1st_order.pdf).  ✅ 
+With all relations outlined in [numerics_outline_spherical_part](HandwrittenNotes/numerics_outline_spherical_part.pdf) (ignore the "make boundary value problem") one can now calculate all non-normalized values and the full zeroth order system is solved. After solving the ODE numerically for a given $\gamma, E_\star$ the dimensionless quantities $\lambda_\star, r_p, E_\infty, q_\infty$ are known. This directly gives the physical quantities $r_\star, E_{bg}, q_\star$. The remaining physical quantitites needed are $T_\star, v_\star, p_\star, G$. Formulas for these are given in [remaining_quantities_and_fits](HandwrittenNotes/remaining_quantities_and_fits.pdf). 
+With the most important one for the pellet rocket force being
+$$
+p_\star = \left( \frac{\lambda_\star r_p}{4 q_\infty^2} \cdot \frac{(\gamma - 1)^2}{\gamma} \right)^\frac{1}{3} \left[ \frac{m (\mu q_{bg})^2}{\Lambda_\star \widetilde{r}_p} \right]^\frac{1}{3}
+$$
+Where the first part is dimensionless, $\mu$ is a model parameter determining the fraction of heat flux converted into heating the neutral gas (Parks: $\mu\approx 0.6 - 0.7$) and the rest are physical input parameters. After calculating all dimensionless quantities (or prefactors) scaling laws of the form
+$$
+f(E_{bg}) = a_0 + a_1 \log_{10}E_{bg}
+$$ are fitted. With this, the zeroth order is fully solved and all physical quantities can be calculated given the physical input parameters $\gamma,E_{bg},q_{bg},r_p, m$. ✅ 
 
-Since this model needs $E_\star$ as an input, but physically $E_{bg}$ is an input parameter, it is important to find a formula to calculate $E_\star(E_{bg})$. Additionally, if one does not want to execute the whole algorithm, one would also need expressions for $\lambda_\star$, $r_p$ and $q_\star(q_{bg})$. Those relations are given in eq. 22 - 26 in [Parks-1978](LiteratureNotes/Parks-1978.md) and won't be refitted here. However, to evaluate if my algorithm is correct, I want to recreate figures 1, 2 and 4 in [Parks-1978](LiteratureNotes/Parks-1978.md). ✅
+The zeroth order scan results and the corresponding scaling laws are shown in the following figures. This can also be compared with figures 1 and 2 in [Parks-1978](LiteratureNotes/Parks-1978.md).
 ![recreated_Parks_E_inf](Images/recreated_Parks_E_inf.png)
-![ode0_solution_Estar_3.000e+04_gamma_7_5](Images/ode0_solution_Estar_3.000e+04_gamma_7_5.png)
+![prefactors_0th_order](Images/prefactors_0th_order.png)
 
 # Asymmetric perturbation to NGS (1st order)
 
@@ -104,13 +115,19 @@ The quantity that is most important for the rocket force on the pellet is $P_1(r
 
 It is apparent that $P_1(r_p)$ depends linearly on $E_{rel}/q_{rel}$ with a slope that weakly depends on $\gamma,E_\star$. (this is tested for values  $0.1<|E_{rel}/q_{rel}|<10^6$) Thus, $P_1(r_p)$ can be given as a linear regression to the numerical solutions in the form
 $$
-P_1(r_p) = a(\gamma,E_\star)\cdot\left(\frac{E_{rel}}{q_{rel}} - b(\gamma,E_\star) \right)
+P_1(r_p) = a(\gamma,E_{bg})\cdot\left(\frac{E_{rel}}{q_{rel}} - b(\gamma,E_{bg}) \right)
 $$
-and the regression parameters $a,b$ can be given through some regression themselves. This way, calculating the numerical solutions as described above is not necessary to quantify the pellet rocket force. (I have not performed the fits yet) 🔥
+and the regression parameters $a,b$ themselves are given as the scaling laws
+$$
+a(E_{bg}) = a_0 + a_1 \log_{10}E_{bg}
+$$
+$$
+b(E_{bg}) = b_0 + b_1 \log_{10}E_{bg} + b_2 (\log_{10} E_{bg})^2
+$$
+This way, calculating the numerical solutions as described above is not necessary to quantify the pellet rocket force. The fit parameter dependence on $E_{bg}$ is shown in the following figure.✅
+![P1_fit_parameters](Images/P1_fit_parameters.png)
 
-# Pellet rocket force 🔥
-
-## Derivation of the force ✅ 
+# Pellet rocket force ✅
 
 Each point in the neutral gas cloud around the pellet has an associated momentum flux tensor $\Pi_{jk}(\vec{r})=p(\vec{r}) + \rho(\vec{r})v_j v_k$ . Momentum conservation at the pellet surface can then be used to calculate the net force which the gas exerts on the pellet through a surface integral. Assuming spherical coordinates and symmetry in the $\varphi$ direction yields the vertical force 
 $$
@@ -121,20 +138,50 @@ $$
 F_z = - \frac{4}{3}\pi r_p^2 \left( v_0^2 R_1 + 2\rho_0 v_0 (U_1+V_1)+P_1  \right)_{r=r_p} 
 $$
 
-Inserting now the chosen normalization of the zeroth and the first order yields a similar equation. (see [force_from_normalized_1st_order](HandwrittenNotes/force_from_normalized_1st_order.pdf)) However, it is found through the numerical solution that (at least for the chosen boundary conditions) $P_1(r_p) \gg (v_0^2 R_1 + 2\rho_0 v_0 (U_1+V_1))_{r=r_p}$ and thus the pellet rocket force becomes (now with  $P_1$ normalized)
+Inserting now the chosen normalization of the zeroth and the first order yields a similar equation. (see [force_from_normalized_1st_order](HandwrittenNotes/force_from_normalized_1st_order.pdf)) However, it is found through the numerical solution that (at least for the chosen boundary conditions) $P_1(r_p) \gg (v_0^2 R_1 + 2\rho_0 v_0 (U_1+V_1))_{r=r_p}$ and thus the pellet rocket force becomes (now with  $P_1$ normalized) 
 $$
 F_z = -\frac{4}{3}\pi r_p^2 p_\star q_{rel} P_1(r_p) \,.
-$$  
-Using the relations for the sonic quantities found by [Parks-1978](LiteratureNotes/Parks-1978.md), the pressure at the sonic radius can be calculated as (see [force_from_normalized_1st_order](HandwrittenNotes/force_from_normalized_1st_order.pdf))
+$$  where $r_p$ is the physical pellet radius, $p_\star$ can be calculated through the scaling law found for the zeroth order and $P_1(r_p)$ is the normalized pressure perturbation and can be calculated through the scaling law found for the first order. 
+Only $E_{rel}$ and $q_{rel}$ are not known yet and some model has to be found to describe the heat flux shielding of the plasma cloud and how large the asymmetry of the heat flux is. (this is also needed to calculate $p_\star$ and $P_1(r_p)$). ✅ 
+# Modelling the heat flux shielding through the ionized ablation cloud✅
+
+The above described model completely describes the dynamics of the neutral gas cloud around the pellet and how this leads to an acceleration of the pellet. Besides the heat capacity ratio $\gamma$, the ablation particle mass $m$ and the pellet radius $r_p$, the main model inputs are the neutral gas cloud boundary conditions.
+Since the neutral ablation cloud is not in direct contact with the background plasma, a model has to be developed for how the incoming electrons are shielded in the ionized part of the ablation cloud. This model should estimate the parameters $E_{bg}, q_{bg},E_{rel},q_{rel}$.
+
+There can be multiple different sources for an asymmetric heat flux on the pellet. This project is however focused on the asymmetry arising along the major radius direction, which is mainly attributed to the drift of the ionized ablation cloud due to the $\nabla \times B$ drift. The plasma cloud can be approximated to be homogeneous in density and temperature. Therefore, the effective heat flux depends on the distance they travel before they reach the neutral gas cloud.
+
+The shielding length is estimated by finding the shape of the boundary between the plasma cloud and the background plasma. The ionized ablated material expands at the sound speed along the field lines. Along the major radius direction, the particles first travel at the pellet velocity and are accelerated through as modelled in Oskars drift paper [Vallhagen-Licentiate-2023](LiteratureNotes/Vallhagen-Licentiate-2023.md). How this can be combined to estimate the shielding length $z(R)$ is detailed in the first part of [plasma_cloud_shielding](HandwrittenNotes/plasma_cloud_shielding.pdf), where $R$ is the place at which the field line hits the pellet along the major radius. The central shielding length is denoted as $z_s$.✅
+
+The important approximation made here is that all electrons having a mean free path shorter than the distance they travel are stopped completely, while the other electrons travel through the plasma cloud unaffected. How this leads to formulas for the heat flux is detailed in the second part of [plasma_cloud_shielding](HandwrittenNotes/plasma_cloud_shielding.pdf). Note that the distance traveled $d$ is longer than the shielding length $z$ by a factor $\xi$ of the cosine of the pitch angle, because the electrons gyrate around the field lines.
+Therefore the condition for electrons reaching the neutral cloud is
 $$
-p_\star = f(\gamma,E_{bg}) \cdot \left( \frac{m}{m_e}\frac{1}{r_p}\mu^2 n_{e,bg}^2 \frac{1}{\Lambda_\star} \right)^{\frac{1}{3}} E_{bg}
-$$  
-where only the dimensionless function $f(\gamma,E_{bg})$ needs to be calculated through solving the full zeroth order numerically and the rest are physical input parameters. This dimensionless function is found to be weakly dependent on $\gamma,E_\star$ and could be approximated as $f(\gamma,E_{bg})\approx 0.04 \pm 0.003$ as shown in the following figure (the right plot shows that $E_{bg}/\sqrt[3]{\Lambda_\star}$ is not weakly dependent).✅ 
-![p_star_dependence_on_E_bg](Images/p_star_dependence_on_E_bg.png)
+\frac{z}{\xi} \leq \lambda_\text{mfp}
+$$
+Since the mean free path mainly depends on the electron velocity $v_e$, a critical velocity can be defined above which the electrons contribute to the heat flux. Defining the thermal velocity $v_{th} = \sqrt{2\frac{k_B T}{m_e}}$ and the mean free path at thermal velocity $\lambda_T$, the critical velocity becomes
+$$
+v_c = \left(\frac{z_s}{\xi \lambda_T} \right)^\frac{1}{4} v_{th} \, .
+$$
+Integrating over the allowed velocities in the 3D Maxwellian distribution then yields the heat flux $q_p$ at the neutral gas cloud boundary. The average energy is then estimated as $E_p = \frac{q_p}{\phi_p}$, where $\phi_p$ is the particle flux. (also derived by integrating over the distribution function) This leads to formulas of the form
+$$
+q_p(R) = q_\text{bg} \cdot f_q(x) \quad \text{and} \quad E_p(R)=E_{bg} \cdot f_E(x)
+$$
+where $q_{bg} = 2 n_{bg} \sqrt{\frac{T^3}{2 \pi m_e}}$ and $E_{bg}=2T$ are the boundary conditions used in [Parks-1978](LiteratureNotes/Parks-1978.md) and $f_q(x), f_E(x)$ are dimensionless functions depending only on the ratio $x=\lambda_T / z(R)$.
 
-## Quantifying the heat-flux asymmetry🔥
+The third section in [plasma_cloud_shielding](HandwrittenNotes/plasma_cloud_shielding.pdf) relates $q_p(R), E_p(R)$ with the boundary conditions of the neutral gas cloud and it's asymmetric perturbation model. A first order Taylor expansion around $R=0$ and noting $R = -\delta R \cos \theta$ then yields
+$$
+\begin{align}
+q_0(r \rightarrow \infty) &= q_p(R=0) \\
+E_0(r \rightarrow \infty) &= E_p(R=0) \\
+q_{rel} &= - \frac{1}{q_p(R=0)} \frac{\partial q_p}{\partial x}|_{x=x_s} \frac{\partial x}{\partial z}|_{z=z_s} \frac{\partial z}{\partial R}|_{R=0} \delta R \\
+q_{rel} &= - \frac{1}{E_p(R=0)} \frac{\partial E_p}{\partial x}|_{x=x_s} \frac{\partial x}{\partial z}|_{z=z_s} \frac{\partial z}{\partial R}|_{R=0} \delta R
+\end{align}
+$$
+where $x_s=x(z=z_s)$. If one considers the projection onto the first Legendre polynomial instead, it is easy to show that $-\frac{dq_p}{dR} \delta R = Q_1(\delta R)$ and higher orders are only related to higher order Legendre polynomials. The variation parameter is assumed to be $\delta R = r_p$, which would mean field lines not hitting the pellet directly do not significantly contribute to the dynamics within the neutral ablation cloud. ✅
 
-Apart from background plasma parameters, which are taken to be model input parameters, the only quantities left to be determined to quantify the pellet rocket force are $E_{rel}$ and $q_{rel}$. Here, the shielding length asymmetry through the ionized ablation cloud becomes important. (Now I need to go through Oskars ideas on how we model this) 🔥
+Together with relations found in Oskar's drift paper, the boundary conditions to the neutral ablation cloud can be calculated given the pellet velocity $v_p$, the pellet radius $r_p$, the major radius $R_m$, the electron background density $n_{bg}$, the electron background temperature $T_{bg}$ and a suitable ionization radius around the pellet $r_i$.
+
+Note that for the drift depends on the ablation rate, however to estimate the ablation rate from our model the boundary condtions are needed. This means this model needs to be solved self constent so that the predicted ablation rate is the same as the initially used ablation rate.
+
 
 ## Estimating the magnitude of the rocket acceleration ⛔
 

@@ -326,4 +326,7 @@
 - went over Oskars ideas on the heat flux asymmetry
 - checked his derivations and made the reasoning more clear for myself
 	- look into [plasma_cloud_shielding](HandwrittenNotes/plasma_cloud_shielding.pdf)
-- 
+
+## 2024-03-27
+- almost completed [Project Summary](Project%20Summary.md) to include the plasma shielding estimate
+- I adjusted some plots to make them look nicer
