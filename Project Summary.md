@@ -1,4 +1,4 @@
-This document is supposed to give an overview of the project without going into all details.
+()This document is supposed to give an overview of the project without going into all details.
 It should refer to other notes or documents that contain the necessary details. It should also state which parts of the project are done (provisionally) and potentially where I'm working on. As the steps of this project might change, this is an evolving document, unlike the planning report, which was how we envisioned the project at the start.
 Oskars summary is more detailed than this document and includes all necessary details. (see [Summary_by_Oskar_2024-02-09](CollaborationDocuments/Summary_by_Oskar_2024-02-09.pdf)) The other notes I refer to here give the full derivations and are therefore even more detailed.
 
@@ -89,7 +89,7 @@ $$
 
 In the derivation of the force on the pellet (further down), it turns out that only the $l=1$ ($X_1(\theta)=\cos\theta$, $Y_1(\theta)=-\sin\theta$) mode contributes. Therefore, from now on only this mode is considered. For the normalization of the first order quantities, two factors are introduced which encode the relative contribution of the asymmetry in the background heat flux $q_{rel}=Q_1(\infty)/q_{bg}$ and the energy of the incoming electrons $E_{rel}=\mathcal{E}_1(\infty)/E_{bg}$. Then all first order quantities are normalized in the form $P_1(r)=\widetilde{P}_1(r) / p_\star q_{rel}$. This leads to a very similar set of 6 equations. (see [normalized_first_order_eqs](HandwrittenNotes/normalized_first_order_eqs.pdf)) This system of equations can be written as the matrix-vector equation (see [first_order_ode_as_matrix_vector_equation](HandwrittenNotes/first_order_ode_as_matrix_vector_equation.pdf))
 $$
-A(r) \cdot \frac{d \vec{y}_1'}{dr} = B(r) \cdot \vec{y}_1(r), \quad \text{with} \quad \vec{y}_1(r)=\left[P_1(r), \mathcal{T}_1(r), U_1(r), V_1(r),Q_1(r),\mathcal{E}_1(r) \right]^T
+A(r) \cdot \frac{d \vec{y}_1}{dr} = B(r) \cdot \vec{y}_1(r), \quad \text{with} \quad \vec{y}_1(r)=\left[P_1(r), \mathcal{T}_1(r), U_1(r), V_1(r),Q_1(r),\mathcal{E}_1(r) \right]^T
 $$
 where $A$ and $B$ are matrices which only depend on the normalized zeroth order $\vec{y}_0(r)$, $\gamma$, $E_\star$ and $\lambda_\star$. Calculating $C=A^{-1} \cdot B$ analytically (using [SymPy](https://www.sympy.org/en/index.html) for convenience) and handling an appearing singularity at $r=1$ leads to a numerically solvable matrix differential equation with the boundary conditions
 $$
@@ -131,7 +131,7 @@ This way, calculating the numerical solutions as described above is not necessar
 
 Each point in the neutral gas cloud around the pellet has an associated momentum flux tensor $\Pi_{jk}(\vec{r})=p(\vec{r}) + \rho(\vec{r})v_j v_k$ . Momentum conservation at the pellet surface can then be used to calculate the net force which the gas exerts on the pellet through a surface integral. Assuming spherical coordinates and symmetry in the $\varphi$ direction yields the vertical force 
 $$
-F_z = \left(-\underset{S}{\int} \overset{\leftrightarrow}{\Pi}\cdot\mathrm{d}\vec{S}\right)_z = -2\pi r_p^2 \int_0^\pi\left( \rho v_z v_r + p \cos\theta\right)_{r=r_p}\,\mathrm{d}\theta \,.
+F_z = \left(-\underset{S}{\int} \overset{\leftrightarrow}{\Pi}\cdot\mathrm{d}\vec{S}\right)_z = -2\pi r_p^2 \int_0^\pi\left( \rho v_z v_r + p \cos\theta\right)_{r=r_p} \sin\theta\,\mathrm{d}\theta \,.
 $$
 Inserting the anisotropic perturbations introduced above, linearizing the integral,  and then solving the integral analytically yields (see [derivation_force_from_perturbation](HandwrittenNotes/derivation_force_from_perturbation.pdf) for more details)✅ 
 $$
