@@ -1,4 +1,4 @@
-()This document is supposed to give an overview of the project without going into all details.
+This document is supposed to give an overview of the project without going into all details.
 It should refer to other notes or documents that contain the necessary details. It should also state which parts of the project are done (provisionally) and potentially where I'm working on. As the steps of this project might change, this is an evolving document, unlike the planning report, which was how we envisioned the project at the start.
 Oskars summary is more detailed than this document and includes all necessary details. (see [Summary_by_Oskar_2024-02-09](CollaborationDocuments/Summary_by_Oskar_2024-02-09.pdf)) The other notes I refer to here give the full derivations and are therefore even more detailed.
 
@@ -150,7 +150,7 @@ Since the neutral ablation cloud is not in direct contact with the background pl
 
 There can be multiple different sources for an asymmetric heat flux on the pellet. This project is however focused on the asymmetry arising along the major radius direction, which is mainly attributed to the drift of the ionized ablation cloud due to the $\nabla \times B$ drift. The plasma cloud can be approximated to be homogeneous in density and temperature. Therefore, the effective heat flux depends on the distance they travel before they reach the neutral gas cloud.
 
-The shielding length is estimated by finding the shape of the boundary between the plasma cloud and the background plasma. The ionized ablated material expands at the sound speed along the field lines. Along the major radius direction, the particles first travel at the pellet velocity and are accelerated through as modelled in Oskars drift paper [Vallhagen-Licentiate-2023](LiteratureNotes/Vallhagen-Licentiate-2023.md). How this can be combined to estimate the shielding length $z(R)$ is detailed in the first part of [plasma_cloud_shielding](HandwrittenNotes/plasma_cloud_shielding.pdf), where $R$ is the place at which the field line hits the pellet along the major radius. The central shielding length is denoted as $z_s$.✅
+The shielding length is estimated by finding the shape of the boundary between the plasma cloud and the background plasma. The ionized ablated material expands at the sound speed along the field lines. Along the major radius direction, the particles first travel at the pellet velocity and are accelerated as modelled in Oskars drift paper [Vallhagen-Licentiate-2023](LiteratureNotes/Vallhagen-Licentiate-2023.md). How this can be combined to estimate the shielding length $z(R)$ is detailed in the first part of [plasma_cloud_shielding](HandwrittenNotes/plasma_cloud_shielding.pdf), where $R$ is the place at which the field line hits the pellet along the major radius. The central shielding length is denoted as $z_s$.✅
 
 The important approximation made here is that all electrons having a mean free path shorter than the distance they travel are stopped completely, while the other electrons travel through the plasma cloud unaffected. How this leads to formulas for the heat flux is detailed in the second part of [plasma_cloud_shielding](HandwrittenNotes/plasma_cloud_shielding.pdf). Note that the distance traveled $d$ is longer than the shielding length $z$ by a factor $\xi$ of the cosine of the pitch angle, because the electrons gyrate around the field lines.
 Therefore the condition for electrons reaching the neutral cloud is
@@ -180,7 +180,7 @@ where $x_s=x(z=z_s)$. If one considers the projection onto the first Legendre po
 
 Together with relations found in Oskar's drift paper, the boundary conditions to the neutral ablation cloud can be calculated given the pellet velocity $v_p$, the pellet radius $r_p$, the major radius $R_m$, the electron background density $n_{bg}$, the electron background temperature $T_{bg}$ and a suitable ionization radius around the pellet $r_i$.
 
-Note that for the drift depends on the ablation rate, however to estimate the ablation rate from our model the boundary condtions are needed. This means this model needs to be solved self constent so that the predicted ablation rate is the same as the initially used ablation rate.
+Note that for the drift depends on the ablation rate, however to estimate the ablation rate from our model the boundary conditions are needed. This means this model needs to be solved self consistently so that the predicted ablation rate is the same as the initially used ablation rate.✅
 
 
 ## Estimating the magnitude of the rocket acceleration ⛔
