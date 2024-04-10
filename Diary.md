@@ -321,7 +321,7 @@
 	- since Per Helander is here from 2024-04-08, I need to prepare some slides to be able to update him and present him the results
 - I updated the [Project Summary](Project%20Summary.md) 
 
-# 2024-03-19 to 2024-03-21
+## 2024-03-19 to 2024-03-21
 
 - went over Oskars ideas on the heat flux asymmetry
 - checked his derivations and made the reasoning more clear for myself
@@ -330,3 +330,12 @@
 ## 2024-03-27
 - almost completed [Project Summary](Project%20Summary.md) to include the plasma shielding estimate
 - I adjusted some plots to make them look nicer
+
+## 2024-04-09 and 2024-04-10
+
+- Tried to get rid of the approximation $dE/dr$ and inserted Legendre polynomials to see if it is still possible to decouple $r$ and $\theta$, I did not succeed and I think we have to live with this approximation
+- I have found in [Parks, 1977] his reasoning for $dE/ds=dE/dr$. mainly figure 1b
+	- The integrated density from infinity to a radius r is does not depend much on which field line the electrons travel on.
+	- Contradictory in my mind is that the density near the pellet is the highest and therefore it does matter if we integrate along the field lines or along the radius?
+- I have checked the temperature at the sonic radius. It is around 0.5 to 1 eV, if I interpret [Miles, 1972] correctly, there is no significant dissociation or ionization below 10 eV. Therefore, I think we should assume it is a D2 gas and not D. $\Rightarrow \gamma =  7/5$
+- I noticed that I have set the plasma cloud temperature to be 2 eV. I do not remember why I did this. In Oskars drift paper he assumes 30 eV. With this the rocket acceleration changes slightly.
