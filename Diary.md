@@ -339,3 +339,23 @@
 	- Contradictory in my mind is that the density near the pellet is the highest and therefore it does matter if we integrate along the field lines or along the radius?
 - I have checked the temperature at the sonic radius. It is around 0.5 to 1 eV, if I interpret [Miles, 1972] correctly, there is no significant dissociation or ionization below 10 eV. Therefore, I think we should assume it is a D2 gas and not D. $\Rightarrow \gamma =  7/5$
 - I noticed that I have set the plasma cloud temperature to be 2 eV. I do not remember why I did this. In Oskars drift paper he assumes 30 eV. With this the rocket acceleration changes slightly.
+
+## 2024-04-24
+
+- I realized that I should start writing in this diary again
+- I have been working on quite a lot of things. LaTeX, visualizations, $q_{rel}=0$ solution, thinking about how to improve the model, ... it's hard to remember everything
+- yesterday I have written a first draft of the section "Total force on the pellet"
+- today I want to start writing on the neutral gas cloud model
+- yesterday night I had a few new ideas how to motivate or improve the $\nabla\cdot\vec{q} \approx \frac{dq}{dr}$ approximation
+	- I realized that we do not necessarily need to expand q in Legendre polynomials. 
+	- We only need to make sure that the perturbation works, i.e. that we can cancel the 0th order differential equation in the 1st order energy balance equation. 
+	- And then we need to find some theta dependence for q, so that projection on the $\cos\theta$ mode gets rid of the theta dependence
+	- the best way to think about the heat flux is to think that the electrons travel along the field lines, i.e. $\vec{q}=q\hat{n}$, where $\hat{n}$ is perpendicular to $\hat{z}$ and preferably points in the cylindrical coordinates $\hat{r}$ direction (inwards).
+	- with this assumption for $\vec{q}$, it is
+	$$
+	\nabla\cdot\vec{q} = \hat{n}\nabla q + [q \nabla\cdot\hat{n}] = \sin\theta \frac{\partial q}{\partial r} + \cos\theta \frac{1}{r} \frac{\partial q}{\partial \theta} + [\frac{1}{r \sin\theta}q ]
+	$$
+	- now we need to find some way how this is approximately $\partial q/\partial r$ 
+	- and then we need some form for the perturbation for which the projection on to $\cos\theta$ works
+- I have skimmed through some of the papers which tried to improve on the NGS model. Parks himself states "1D model approximation is the removal of the heating anisotropy in the energy equation by substituting the real source $\nabla\cdot\vec{q}$ with a 'fictitious source' $dq/dr$"
+- Some models exist for the heat flux which see it as cylindrically symmetric and use Bessel functions for q, I have not understood how they got to this yet. And it is unclear how we can arrive at a 1D model, like we have currently.
