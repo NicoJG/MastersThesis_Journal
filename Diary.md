@@ -360,3 +360,16 @@
 - I have skimmed through some of the papers which tried to improve on the NGS model. Parks himself states "1D model approximation is the removal of the heating anisotropy in the energy equation by substituting the real source $\nabla\cdot\vec{q}$ with a 'fictitious source' $dq/dr$"
 - Some models exist for the heat flux which see it as cylindrically symmetric and use Bessel functions for q, I have not understood how they got to this yet. And it is unclear how we can arrive at a 1D model, like we have currently.
 - Today has not been productive! I tried to write on describing the NGS model, but instead I have mostly read some papers, for example the beginning of Parks paper. When trying to write something I get overwhealmed and don't know how much I need to write, how to structure it and to write everything correctly. I'm a bit worried that I will not have enough time to finish my thesis. Now I have 4 weeks left and I have written like 4 pages...
+
+## 2024-04-25
+- today was a bit more productive and I managed to write the overall model for the neutral gas shielding until the point where the spherically symmetric equations have to derived
+- I just had the thought that I should look into some of the papers mentioned by Pegourie if the plasma shielding model we developed should maybe only be used to describe the degree of asymmetry. Because the NGS model uses the pure background plasma q and E and it works well.
+- Also, I just reread Pers initial notes. Maybe it is worth it to describe his thoughts on comparing the rocket force to the pellet velocity to have a measure if it is significant
+
+## 2024-04-26
+- unfortunately, again a quite unproductive day.
+- I have read over what I have written yesterday, and improved a few points
+- otherwise, I have written like half a page on the NGS model equations
+- a lot of time was spend on non-writing activities like listening to a talk about Radar at the division seminar and planing my writing a bit with Tünde and Istvan
+- we decided that I should only focus on necessary background and only mention stuff like disruptions, shattered pellet injection and ablation homogenization
+- also, i should finish around 1 chapter per week now and send it to Oskar, Tünde, Istvan and Sarah on the Fridays

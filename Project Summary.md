@@ -1,4 +1,4 @@
-This document is supposed to give an overview of the project without going into all details.
+LetThis document is supposed to give an overview of the project without going into all details.
 It should refer to other notes or documents that contain the necessary details. It should also state which parts of the project are done (provisionally) and potentially where I'm working on. As the steps of this project might change, this is an evolving document, unlike the planning report, which was how we envisioned the project at the start.
 Oskars summary is more detailed than this document and includes all necessary details. (see [Summary_by_Oskar_2024-02-09](CollaborationDocuments/Summary_by_Oskar_2024-02-09.pdf)) The other notes I refer to here give the full derivations and are therefore even more detailed.
 
