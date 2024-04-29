@@ -373,3 +373,15 @@
 - a lot of time was spend on non-writing activities like listening to a talk about Radar at the division seminar and planing my writing a bit with Tünde and Istvan
 - we decided that I should only focus on necessary background and only mention stuff like disruptions, shattered pellet injection and ablation homogenization
 - also, i should finish around 1 chapter per week now and send it to Oskar, Tünde, Istvan and Sarah on the Fridays
+
+## 2024-04-27
+
+- I noticed while plotting $\sigma(E)$, it looks different from the figure 3 in Parks 1977 paper. I do think this is more of a mistake by parks, but hopefully this does not matter too much.
+- I wrote about the normalization of Parks equations today, about 1 page
+
+## 2024-04-29
+
+- Today I have written about the numerical solutions to the NGS model, which is around 2-3 pages.
+- I need to make the plots for the NGS model fit perfectly into the thesis
+- As always, I have also fixed a few things in the parts before, so that it fits better together.
+- 
