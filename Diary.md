@@ -384,4 +384,8 @@
 - Today I have written about the numerical solutions to the NGS model, which is around 2-3 pages.
 - I need to make the plots for the NGS model fit perfectly into the thesis
 - As always, I have also fixed a few things in the parts before, so that it fits better together.
-- 
+
+## 2024-04-30
+
+- Today I have written about the derivation of the non-normalized equations for our perturbative model. It takes up almost 3 pages.
+- I realized that this whole chapter is very very equation heavy. Maybe it is a bit hard to read. But I guess I will wait what my supervisors say about that.
