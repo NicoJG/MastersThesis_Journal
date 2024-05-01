@@ -389,3 +389,10 @@
 
 - Today I have written about the derivation of the non-normalized equations for our perturbative model. It takes up almost 3 pages.
 - I realized that this whole chapter is very very equation heavy. Maybe it is a bit hard to read. But I guess I will wait what my supervisors say about that.
+
+## 2024-05-01
+
+- I just thought about: Do I have to make clear which ideas are from whom? For example, a lot of ideas come from Per and Oskar, but I do not mention them in my thesis.
+- I wrote about the normalization of the perturbation equations
+- I even gave the expressions derived by SymPy, in the appendix. This is probably too much, but since the appendix does not really matter I thought I'd just provide it for completeness.
+- 
