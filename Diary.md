@@ -395,4 +395,12 @@
 - I just thought about: Do I have to make clear which ideas are from whom? For example, a lot of ideas come from Per and Oskar, but I do not mention them in my thesis.
 - I wrote about the normalization of the perturbation equations
 - I even gave the expressions derived by SymPy, in the appendix. This is probably too much, but since the appendix does not really matter I thought I'd just provide it for completeness.
-- 
+- I also worked a lot on making the plots more nice
+
+## 2024-05-02
+
+- I realized that I did not mention that both $v_0$ and $v_{1,r}$ automatically go to zero at the pellet surface. Not sure how important that is.
+- I spend a lot of time today making the 1st order plots look nicer
+- I realized that the structure of my thesis might not be optimal, because I am mixing method, results and discussion a lot
+- I stated that "Linear regression has shown relative errors to the results of less than $1\%$.", which is true, but somehow I deleted the code where I have shown this. I might need to write the code for plotting this again.
+- I almost finished the section about the numerical 1st order solution today. I wrote almost 3 pages
