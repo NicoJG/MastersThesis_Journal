@@ -404,3 +404,12 @@
 - I realized that the structure of my thesis might not be optimal, because I am mixing method, results and discussion a lot
 - I stated that "Linear regression has shown relative errors to the results of less than $1\%$.", which is true, but somehow I deleted the code where I have shown this. I might need to write the code for plotting this again.
 - I almost finished the section about the numerical 1st order solution today. I wrote almost 3 pages
+
+## 2024-05-03
+
+- I have written about $q_{rel}=0$ and I have shown that only $p_1$ is important for the rocket force
+- I have written all the figure captions
+- I have proofread the whole asymmetry model section, I am not really satisfied with the quality of this text, but I will wait for the comments until I change anything
+- I have found a bug in my code. I forgot that concatenating the upwards and downwards solution leads to $r=1$ being in the array twice. This messed up interpolation and I saw it because the vectors at r=1 were missing in the velocity vector field. I fixed it by removing duplicates after concatenation
+- Sent the draft of chapter 4 to my supervisors
+- 
