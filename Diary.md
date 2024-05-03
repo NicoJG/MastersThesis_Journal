@@ -412,4 +412,4 @@
 - I have proofread the whole asymmetry model section, I am not really satisfied with the quality of this text, but I will wait for the comments until I change anything
 - I have found a bug in my code. I forgot that concatenating the upwards and downwards solution leads to $r=1$ being in the array twice. This messed up interpolation and I saw it because the vectors at r=1 were missing in the velocity vector field. I fixed it by removing duplicates after concatenation
 - Sent the draft of chapter 4 to my supervisors
-- 
+- I have checked on https://mariechatfield.com/simple-pdf-viewer/ if my figures are colorblind safe. Of course some stuff is hard to distinguish, but overall I would say most of the important detail are visible with any colorvision deficiency. What will help even more is when I annotate the line in the example solutions directly instead of having a legend to the right
