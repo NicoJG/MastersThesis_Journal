@@ -413,3 +413,19 @@
 - I have found a bug in my code. I forgot that concatenating the upwards and downwards solution leads to $r=1$ being in the array twice. This messed up interpolation and I saw it because the vectors at r=1 were missing in the velocity vector field. I fixed it by removing duplicates after concatenation
 - Sent the draft of chapter 4 to my supervisors
 - I have checked on https://mariechatfield.com/simple-pdf-viewer/ if my figures are colorblind safe. Of course some stuff is hard to distinguish, but overall I would say most of the important detail are visible with any colorvision deficiency. What will help even more is when I annotate the line in the example solutions directly instead of having a legend to the right
+
+## 2024-05-06
+
+- I have spend a lot of time yesterday to figure out how to match the fonts in matplotlib to the fonts in LaTeX. The end result is that the only way to make it look completely coherent is to use TeX in matplotlib.
+- Today, I created the illustration for the plasmoid shielding, largely inspired by Oskars illustration
+- I started to write about the plasmoid shielding, I wrote 1.5 pages
+
+## 2024-05-07 to 2024-05-09
+
+- I wrote about the plasmoid shielding
+
+## 2024-05-10
+
+- I adjusted the illustrations a bit to denote the different radii
+- I researched a bit to find experimental results for the pellet rocket acceleration which we could compare to. I did not really find anything. It might be best to compare to Samulyak's presentation and generally say that the order of magnitude of $10^5 \mathrm{m/s^2}$ is found in other papers.
+- Today I could not focus and have basically written nothing
