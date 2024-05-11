@@ -429,3 +429,21 @@
 - I adjusted the illustrations a bit to denote the different radii
 - I researched a bit to find experimental results for the pellet rocket acceleration which we could compare to. I did not really find anything. It might be best to compare to Samulyak's presentation and generally say that the order of magnitude of $10^5 \mathrm{m/s^2}$ is found in other papers.
 - Today I could not focus and have basically written nothing
+
+## 2024-05-11
+
+- Meeting with Oskar: discussed what to write in the remaining chapters
+	- the quantitative results can be quite short
+	- choose ASDEX-U and ITER plasma parameters and show in two plots the dependence on the pellet velocity and pellet radius
+	- ASDEX-U parameters from Samulyaks presentation and ITER from Oskars paper
+	- in the conclusion I will summarize the model and all its approximations and effects of the approximations, I should write about possible improvements and outlook
+	- In the pellet dynamics chapter I should qualitatively explain what happens during pellet injection. That the ablation cloud establishes itself to fully shield the pellet.
+	- I should also explain the mechanisms behind the plasmoid drift, which is the same mechanisms behind plasma drift outwards without the plasma current in a tokamak. The plasmoid can almost be regarded as a mini tokamak non-connected. (explained probably best in Oskars thesis)
+	- Senichenkov should be mentioned in the plasmoid shielding chapter, as an inspiration and in one sentence that we got a more general formula for the shielding length, and that he sees the neutral ablation cloud as constant density
+	- in the introduction mention szepesi and senichenkov models
+	- Oskar is not sure if there is actually a shock front. And since it is not important for our calculations, I might just want to not mention it
+- I had to rewrite some code to prepare for calculating the rocket effect for multiple different parameters
+- The code is "relatively slow", maybe because of the ablation rate iteration. ca. 25 parameter sets per second
+- For the parameters stated by Samulyak for ASDEX-Upgrade, all parameter combinations yield a negative acceleration. Maybe I should do it with Erel=0.
+- Not sure yet what I will scan over and plot
+- I have not written anything in the Thesis today...
