@@ -447,3 +447,83 @@
 - For the parameters stated by Samulyak for ASDEX-Upgrade, all parameter combinations yield a negative acceleration. Maybe I should do it with Erel=0.
 - Not sure yet what I will scan over and plot
 - I have not written anything in the Thesis today...
+
+## 2024-05-12
+
+- I realized that the $E_{rel}=0$ results are still lower than Samulyaks results.
+- I tried to cheat a little and use the unshielded heat flux for the 0th order, the result is a lower pstar and lower acceleration. Presumably it is because of the inverse Lambda in pstar
+- I realized that $q_{rel}$ and $E_{rel}$ both scale, by design, linearly with the radius at which to evaluate the shielding asymmetry, therefore the acceleration also scale linearly and if we choose to evaluate it at $2 r_p$, we get twice as large acceleration
+- apparently, the acceleration is less for smaller pellets, this is the opposite of Samulyaks results
+- The results kind of demotivated me to write this chapter now, hopefully I can discuss it with Oskar tomorrow.
+- Instead, I wrote 1.5 pages of the Introduction
+
+## 2024-05-13
+
+- Things to talk about with Oskar, based on Istvans and Sarahs feedback:
+	- radius in figure 4.2
+		- $r_i >> r_\star$
+	- heat source approximation
+		- Can we find reasoning for $\mu \approx 0.6 - 0.7$? is estimated
+		- $q/\lambda_{mfp} > q/2r$?
+		- Istvans comment on eq. 4.8
+	- explain back pressure?
+	- shock front -> confusion about sonic radius and cloud boundary
+		- mention the difference to the sonic radius
+		- put into the qualitative chapter and only mention that the pressure is small and far away
+	- Sarah says equation 4.26 should be indicated how to derive. 
+	- Istvans comment on eq 4.13
+	- Rename sections to not have subsubsubsections
+	- parantheses before eq 4.28
+		- maybe mention the typical boundary condition errors
+		- E at 20eV mention in a small footnote but not important
+	- index 0 in figure 4.5, $E_\star(E_{bc})$
+	- mistakes in Parks paper
+	- name of sonic quantities prefactors
+	- why is it ok to neglect $\varphi$ dependence in asymmetric model?
+		- phi dependence not important for force
+	- equation labeling of eq. 4.34 to 4.39
+		- put it as text
+	- eq 4.43 $Y_l$ is not orthogonal but basis?
+		- footnote mentioning it is not orthogonal but still suffices for the derivation and is a basis
+	- motivate why $p_1(\infty) = 0$ is always satisfied
+		- add word numerically
+	- fit function for P1 parameter b
+	- coin a name for our model? (suggested by Istvan)
+		- 
+	- Plasmoid shielding:
+	- tube bending (Istvans comment before eq. 4.65)
+	- $(1 + <Z>)$ factors and the densities (electron density or full density)
+		- full density, put factor into lambda
+	- negative Erel exaggerated by our approximation? 
+	- discuss quantitative results
+		- $E_{rel} = 0$ results lower than Samulyaks
+		- why is our model always underestimating it?
+			- plasmoid temperature is 2 eV
+			- taken from the Matsuyama 2022 paper fig. 9 where the dashed line is the time where the material is not on the same line as the neutral ablation cloud anymore
+		- using unshielded heat source decreases pstar
+			- related to the enhanced ablation without shielding
+		- linear scaling with $\delta r$
+			- correct, but it is most reasonable to use $r_p$
+		- acceleration decreases for increasing $r_p$. Samulyak has found the opposite
+			- Oskar and I believe this is because of the temperature and density gradients, which seem to matter more for small pellets
+			- Our acceleration in ITER twice as large as Samulyaks values. This might be because of the gradients or the plasmoid temperature and ionization radius, which might be significantly different for ITER
+			- the plasmoid temperature might be higher because the ionized material heats up faster during the acceleration. It should stay below 10 eV
+			- the ionization radius is probably quite similar for large ITER pellets, however it is hard to estimate. The larger outside pressure could shrink the ionization radius. The larger ablation rate might make it bigger. But should be around 1-2 cm.
+## 2024-05-14
+
+- Continued to write the introduction and almost finished it. (I wrote a bit more than 2 pages today)
+
+## 2024-05-15
+
+- I had to think about Per's question again. Can the pellet rocket force stop the pellet from reaching the core before it is fully ablated? Or rather can the pellet be deflected back?
+	- I initially thought this would be almost impossible to answer because the momentum change is not like in a rocket determined fully through momentum conservation of the pellet material, but the background plasma also exerts pressure on the pellet.
+	- However, we assume and also Parks states that the back pressure plays no significant role in the pellet ablation dynamics. Therefore, maybe it is enough to neglect the background plasma pressure and answer this question purely on the momentum which the pellet has initially and the possible momentum change through the asymmetric ablation.
+	- It might be good to consider the case where all the material is ablated towards one side. Then, can the pellet rocket effect completely stop the pellet?
+	- It might still be more complicated since the momentum gained depends on the heat flux.
+	- When I have time I should come back to those thoughts. And maybe Oskar has some ideas here.
+- I am thinking of making an illustration that explains and shows the similarities between a rocket engine nozzle and the pellet rocket effect. It would look cool and it would be satisfying to explain the name and that it not only fits because of the material ejection but also because of the pressure dynamics. However, I should only do this if I find the time for it
+- I finished the introduction today. (written 1 page on the pellet trajectories and the pellet rocket effect)
+- I have written a first draft of the abstract,  which is needed for the presentation anouncement. (half a pages)
+- Instead of writing more, I tried to include the temperature and density gradients for the calculation of Erel and qrel.
+	- However, Samulyaks presentation only has values for ITER. For ITER I just get slightly larger accelerations and the pellet radius dependence is still the same.
+
