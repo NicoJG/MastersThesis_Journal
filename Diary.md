@@ -527,3 +527,38 @@
 - Instead of writing more, I tried to include the temperature and density gradients for the calculation of Erel and qrel.
 	- However, Samulyaks presentation only has values for ITER. For ITER I just get slightly larger accelerations and the pellet radius dependence is still the same.
 
+## 2024-05-16
+
+- Today is only a half day for me
+- I fixed a LaTeX issue where the table of contents links to the frontmatter was wrong. (this is wrong in the LaTeX template on Overleaf)
+- I sat and thought a lot about what to write in the theory part, without actually writing
+- Ok, I did write stuff but I couldn't get past the first few sentences of the MCF chapter. Today was a shitty writing day
+
+## 2024-05-17
+
+- Today I wrote 2 pages of the theory until the introduction of particle gyration
+
+## 2024-05-19
+
+- Wrote 2 pages and finished the MCF chapter
+
+## 2024-05-20
+
+- reworked the abstract
+- meeting with Oskar:
+- abstact include distruption or off normal event
+	- is rocket effect main source of pellet acceleration?
+	- density gradient in AUG? varies by 1 or 2e19 
+	- with 10keV/m gradient the pellet size dependence inverts but twice as large values
+	- ionization radius plays a role
+	- how do I cite this gradient?
+	- pellet ablation time scales?
+	- how does PI help with disruptions?
+		- avoid heat deposition locally on device componenets
+		- impurities radiate energy homogeneous
+		- impurities exit at diverter should not go only to diverter
+		- when current decays too fast -> eddy currents in wall, stromg magnetic field make forces on the structure big currents and strong B field
+		- cooling controls the conductivity of the plasma
+		- avoid formation of runaways increase electron density increase the drag force
+		- pellet mitigates mostly damage but can not stop the disruption
+- I wrote 1-2 pages on the pellet dynamics
