@@ -90,6 +90,17 @@ Pégourié, B. “Review: Pellet Injection Experiments and Modelling.” _Plasma
 - DT-pellets could have different dynamics than $D_2$ or $H_2$ (?) pellets
     - $D_2$ is deuterium (1p+1n), $H_2$ is a hydrogen molecule (2p) which is naturally formed when cooling hydrogen
 
+
+- measurements:
+	- neutral cloud density: 1e25-1e26 m^-3
+	- plasmoid density: 1e23-1e24 m^-3
+	- temperature 1-4 eV
+	- beginning of homogenization (after 5-10 musec) 20-25 eV in plasmoid
+	- constant temperature in plasmoid for around 4 cm
+	- ablation rate nearly impossible to measure directly
+	- NGS scaling is accurate for moderate injected power
+	- 
+
 # Chapter 3
 
 - several different dynamics contribute to the pellet material being spread over the whole plasma inside the tokamak (or stellerator)

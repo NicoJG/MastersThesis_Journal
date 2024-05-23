@@ -562,3 +562,13 @@
 		- avoid formation of runaways increase electron density increase the drag force
 		- pellet mitigates mostly damage but can not stop the disruption
 - I wrote 1-2 pages on the pellet dynamics
+
+## 2024-05-22
+- wrote 1 page on the pellet trajectory (I repeated myself a bit with the introduction)
+	- I am not sure if the explanation of the rocket models is correct
+- rewrote the last part of the plasmoid shielding to include the gradients
+
+## 2024-05-23
+
+- read and corrected the pellet dynamics chapter and sent it to my supervisors
+- wrote the final section in chapter 4 where I present the actual predictions of our model and compare it to Samulyaks predictions
