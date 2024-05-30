@@ -1,16 +1,29 @@
 
-- write planning report ✅
-- go through Parks paper
-- solve spherical part numerically
-	- implement solver to get $\eta_*$ and $\lambda_*$ for one specific $E_*$ 
-	- implement integration to infinity to get $E_{bg}$ , $q_{bg}$ , $q_*$ 
-	- solve system of equations to find $v_*$ , $T_*$ , $p_*$ , G
-	- compare to Parks results
-- skim through Szepesi paper
-- go through first part of Oskars thesis
-- derive equations for incoming heat (-transport/-absorption) ✅
-- write equations in normalized form
-	- spherical part ✅
-	- asymmetric part
-- look at Landau Lifschitz derivation for the energy balance equation
-- potentially read https://iopscience.iop.org/article/10.1088/0029-5515/34/1/I03
+- properly cite SciPy!
+- Make plots with LaTeX
+- Inplot legend for the solutions
+- change the title page image
+- write the Acknowledgements
+- write the acronyms and nomenclature
+- make stuff in the appendix readable or remove unnecessary stuff
+
+## final polishing before handing it in
+
+- check the bibliography
+	- make volume numbers in bibliography bold instead of italic
+	- should the bibliography really list all authors?
+- check equation punctuation
+- make equations that are not referenced to equation*
+- handle all the LaTeX warnings
+
+
+## optional
+- explain the rocket nozzle correspondence with an illustration
+- make a better fit of b
+- mention mistakes in the pstar and Tstar formulas in the appendix
+- maybe show how well the boundary conditions are met for both the 0th and 1st order in the appendix
+- talk about the E<20eV limitation in the appendix
+- maybe show p_0 plot in the appendix
+- could compare the shielding length formula with Senichenkovs formula
+- understand where the ideal gas fluid equations come from (Landau Lifschitz for energy balance)
+	- optionally: write the subsubsection on the ideal gas fluid dynamics

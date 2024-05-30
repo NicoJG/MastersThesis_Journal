@@ -572,3 +572,17 @@
 
 - read and corrected the pellet dynamics chapter and sent it to my supervisors
 - wrote the final section in chapter 4 where I present the actual predictions of our model and compare it to Samulyaks predictions
+
+## 2024-05-24
+
+- wanted to write the conclusion, but could not think about what I want to include and how to start
+- instead, I started on implementing all the comments
+- almost finished chapter 1 (Introduction), but some parts have to be rewritten because it was wrong
+
+## 2024-05-26
+
+- wrote chapter 5 (4 pages)
+
+## 2024-05-27
+
+- almost fully corrected chapter 1 and 2
