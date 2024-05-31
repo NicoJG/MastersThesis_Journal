@@ -1,12 +1,8 @@
 ## important
 
 - ask Tünde about the final submission deadline
-- properly cite SciPy!
-- change the title page image
-	- adjust the cover page image description on page iv
 - write the Acknowledgements
 - make stuff in the appendix readable or remove unnecessary stuff
-- check the densities together with Oskar
 
 ## final polishing before submission
 
@@ -14,9 +10,8 @@
 	- make volume numbers in bibliography bold instead of italic
 	- should the bibliography really list all authors?
 - check equation punctuation
-- make equations that are not referenced to equation*
+- make equations that are not referenced to equation* ?
 - handle all the LaTeX warnings
-- check if the acronyms are accurate
 - check if the pages in the frontmatter and backmatter are correct, i.e. correct cleardoublepage and newpage
 
 
