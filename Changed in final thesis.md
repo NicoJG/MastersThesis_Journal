@@ -1,0 +1,1 @@
+- changed b scaling law in figure 4.11, table A.2, and Eq A.4
